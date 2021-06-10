@@ -16,6 +16,9 @@ public class Prenotazione {
 	private Long id;
 	
 	@Column
+	private String nome;
+	
+	@Column
 	private LocalDate data;
 	
 	@Column
@@ -30,6 +33,15 @@ public class Prenotazione {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public LocalDate getData() {
