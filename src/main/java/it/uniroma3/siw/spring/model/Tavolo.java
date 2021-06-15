@@ -17,7 +17,37 @@ public class Tavolo {
     private String Posti;
 
 
-    @ManyToOne
+    public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public String getPosti() {
+		return Posti;
+	}
+
+
+	public void setPosti(String posti) {
+		Posti = posti;
+	}
+
+
+	public Ristorante getRistorante() {
+		return ristorante;
+	}
+
+
+	public void setRistorante(Ristorante ristorante) {
+		this.ristorante = ristorante;
+	}
+
+
+	@ManyToOne
     private Ristorante ristorante;
  
 }
