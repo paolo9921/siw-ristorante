@@ -17,18 +17,7 @@
 </head>
 <body id="home">
 	<header class="box">
-		<div id="navbar" class="navbar top">
-			<a class="navbar-brand" href="home.HTML"></a>
-			<h1>PIZZERIA ROMA3</h1>
-			<nav>
-				<ul>
-					<li><a href="home.html">Home</a></li>
-					<li><a href="menu.html">Menu</a></li>
-					<li><a th:href="@{/prenota}">Prenota</a></li>
-					<li><a href="contatti2.HTML">Contatti</a></li>
-				</ul>
-			</nav>
-		</div>
+		<div th:replace="fragments/base.html :: navbar"></div>
 		<div class="content">
 			<h1>Benvenuto sulla nostra pagina!</h1>
 			<p>

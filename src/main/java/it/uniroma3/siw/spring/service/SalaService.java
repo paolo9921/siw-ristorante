@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -18,8 +19,12 @@ public class SalaService {
 
 	
 	@Transactional
-	public void inserisci(Sala s) {
-		this.salaRepository.save(s);
+	public Sala inserisci(Sala s) {
+		return salaRepository.save(s);
+	}
+	@Transactional
+	public List<Sala> tutti() {
+		return (List<Sala>) salaRepository.findAll();
 	}
 	
 	

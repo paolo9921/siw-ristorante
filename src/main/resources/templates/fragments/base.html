@@ -11,10 +11,17 @@
 		<header th:fragment="header">
 		<h1 th:text="#{base.titolo}"></h1>
 		
-		<div class="navbar">
-			<a th:href="@{/menu}" th:text="#{base.menu}">Menu</a> 
-			<a th:href="@{/prenota}" th:text="#{base.prenota}">Prenota</a>
-			<a href="/" th:text="#{base.informazioni}">Informazioni</a>
+		<div id="navbar" class="navbar top" th:fragment="navbar">
+			<a class="navbar-brand" href="home.HTML"></a>
+			<h1>PIZZERIA ROMA3</h1>
+			<nav>
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="menu.html">Menu</a></li>
+					<li><a th:href="@{/prenota}">Prenota</a></li>
+					<li><a href="/contatti.html">Contatti</a></li>
+				</ul>
+			</nav>
 		</div>
 		
 	</header>

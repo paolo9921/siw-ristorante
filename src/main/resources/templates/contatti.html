@@ -15,7 +15,8 @@
   </head>
   <body>
    <header class="box">
-      <div id="navbar" class="navbar top">
+   <div th:replace="fragments/base.html :: navbar"></div>
+      <!-- div id="navbar" class="navbar top">
         <a class="navbar-brand" href="home.HTML"></a>
         <h1>PIZZERIA ROMA3</h1>
         <nav>
@@ -26,7 +27,7 @@
            <li><a href="contatti2.HTML">Contatti</a></li>
           </ul>
         </nav>
-      </div>
+      </div>-->
      
      <div class="position-absolute top-0 left-0">
        <button type="button" class="btn btn-link  btn-sm " onclick="goBack()">Torna indietro</button>

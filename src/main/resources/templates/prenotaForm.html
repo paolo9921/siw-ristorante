@@ -10,7 +10,8 @@
 	<div id="container">
 		<header th:replace="fragments/base.html :: header"></header>
 		<div id="main">
-
+					
+			
 
 			<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
 				<div th:if="${#fields.hasGlobalErrors()}">
@@ -32,6 +33,10 @@
 							<option th:each="i : ${#numbers.sequence(1, 10)}" th:text="|${i} persone|"th:value="${i}">
 						</select>
 				
+				<strong	th:text="#{form.sala}"></strong>
+				<select name="salaSelezionata">
+							<option th:each="sala : ${sale}" th:text="${sala.nome}" th:value="${sala.id}">
+						</select>
 				
 				<button
 						type="submit" th:text="#{form.conferma}">Conferma</button>

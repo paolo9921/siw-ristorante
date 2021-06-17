@@ -2,12 +2,12 @@ package it.uniroma3.siw.spring.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,7 +20,7 @@ public class Prenotazione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	
-	 @OneToOne
+	 @OneToOne(cascade = {CascadeType.ALL})	 
 	 private Tavolo tavolo;
 	 
 	 private String nome;
@@ -33,6 +33,17 @@ public class Prenotazione {
 	 private String orario;
 	 
 	 private int posti;
+
+	 /*@OneToOne
+	 private Sala sala;
+	 
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
+	}*/
 
 	public long getId() {
 		return id;
@@ -66,8 +77,9 @@ public class Prenotazione {
 		this.orario = orario;
 	}
 
+	
 	public int getPosti() {
-		return posti;
+		return this.posti;
 	}
 
 	public void setPosti(int posti) {
@@ -81,5 +93,6 @@ public class Prenotazione {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 
 }

@@ -20,6 +20,7 @@ import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Sala;
 import it.uniroma3.siw.spring.service.PrenotazioneService;
 import it.uniroma3.siw.spring.service.SalaService;
+import it.uniroma3.siw.spring.service.TavoloService;
 
 
 @Controller
@@ -34,6 +35,9 @@ public class PrenotazioneController {
 	@Autowired
 	private SalaService salaService;
 	
+	@Autowired
+	private TavoloService tavoloService;
+	
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	
@@ -41,18 +45,22 @@ public class PrenotazioneController {
 	
 	@RequestMapping(value="/prenota", method = RequestMethod.GET)
 	public String addPrenotazione(Model model) {
+		logger.debug("*sale: "+this.salaService.tutti().toString());
 		model.addAttribute("prenotazione", new Prenotazione());
+		model.addAttribute("sale", this.salaService.tutti());
 		return "prenotaForm.html";
 	}
 	
 	@RequestMapping(value = "/addPrenotazione", method = RequestMethod.POST)
-	public String newCollezione(@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,BindingResult bindingResult) {
-		this.sala = salaService.salaPerId(Long.valueOf(1));
-		logger.debug("*****************************POSTI: "+prenotazione.getPosti()+".");
-		this.prenotazioneValidator.validate(prenotazione,bindingResult);
+	public String newCollezione(@RequestParam Long salaSelezionata, @ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,BindingResult bindingResult) {
+		sala = salaService.salaPerId(salaSelezionata);
+		
+		//i posti liberi nella sala vengono aggiornati nel validate
+		this.prenotazioneValidator.validate(prenotazione,sala,bindingResult);
 		if (!bindingResult.hasErrors()) {
-			sala.setPostiLiberi(prenotazione.getPosti());
-			prenotazione.setTavolo(new Tavolo(prenotazione.getPosti(),sala));
+			
+			
+			prenotazione.setTavolo(tavoloService.inserisci(new Tavolo(prenotazione.getPosti(),sala))); 
 			this.prenotazioneService.inserisci(prenotazione);
 			
 			return "index.html";
