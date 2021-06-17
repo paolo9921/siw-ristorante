@@ -8,28 +8,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import javax.persistence.OneToOne;
+
+
 @Entity
 public class Prenotazione {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@Column
-	private LocalDate data;
-	
-	@Column
-	private String orario;
-	
-	@Column 
-	private int posti;
 
-	public Long getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+	
+	 @OneToOne
+	 private Tavolo tavolo;
+	 
+	 @Column
+	 private LocalDate data;
+	 
+	 @Column
+	 private String orario;
+	 
+	 private int posti;
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Tavolo getTavolo() {
+		return tavolo;
+	}
+
+	public void setTavolo(Tavolo tavolo) {
+		this.tavolo = tavolo;
 	}
 
 	public LocalDate getData() {
@@ -55,6 +68,5 @@ public class Prenotazione {
 	public void setPosti(int posti) {
 		this.posti = posti;
 	}
-	
-	
+
 }

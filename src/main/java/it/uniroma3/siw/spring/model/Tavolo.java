@@ -1,3 +1,4 @@
+
 package it.uniroma3.siw.spring.model;
  
 import javax.persistence.Column;
@@ -60,7 +61,4 @@ public class Tavolo {
 	public void setSala(Sala sala) {
 		this.sala = sala;
 	}
-    
-    
- 
 }

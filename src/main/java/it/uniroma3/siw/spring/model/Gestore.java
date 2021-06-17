@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -65,7 +66,4 @@ public class Gestore {
 	public void setNumeroTelefono(String numeroTelefono) {
 		this.numeroTelefono = numeroTelefono;
 	}
-	
-	
-	
 }
