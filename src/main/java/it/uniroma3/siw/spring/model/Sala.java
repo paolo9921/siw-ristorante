@@ -33,7 +33,12 @@ public class Sala {
 		this.id = id;
 	}
 
-
+	public int getPostiLiberi() {
+		return this.postiLiberi;
+	}
+	public void setPostiLiberi(int posti) {
+		this.postiLiberi-=posti;
+	}
 
 	public List<Tavolo> getTavoli() {
 		return tavoli;
