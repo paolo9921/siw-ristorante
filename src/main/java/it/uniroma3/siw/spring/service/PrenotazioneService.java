@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.model.Prenotazione;
+import it.uniroma3.siw.spring.model.Tavolo;
 import it.uniroma3.siw.spring.repository.PrenotazioneRepository;
 
 

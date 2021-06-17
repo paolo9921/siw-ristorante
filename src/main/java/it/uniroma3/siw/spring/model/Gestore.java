@@ -26,8 +26,6 @@ public class Gestore {
 	@Column 
 	private String numeroTelefono;
 
-	@ManyToOne
-	private Ristorante ristorante;
 	
 	public Long getId() {
 		return id;

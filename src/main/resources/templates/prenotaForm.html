@@ -12,8 +12,7 @@
 		<div id="main">
 
 
-			<form th:action="@{/admin/addPrenotazione}" method="POST"
-				th:object="${prenotazione}">
+			<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
@@ -29,15 +28,13 @@
 				<strong th:text="#{form.data}">Data:</strong> <input type="date" th:field="*{data}" /> <br> 
 					
 				<strong	th:text="#{form.numeroPersone}">Persone:</strong>
-				<select
-							name="numeroPersone">
-							<option th:each="i : ${#numbers.sequence(1, 10)}" th:text="|${i} persone|"th:value="*{posti}"
-								/>
+				<select th:field="*{posti}">
+							<option th:each="i : ${#numbers.sequence(1, 10)}" th:text="|${i} persone|"th:value="${i}">
 						</select>
 				
 				
 				<button
-						type="submit" th:text="#{form.conferma}">Conferma</button></span>
+						type="submit" th:text="#{form.conferma}">Conferma</button>
 
 
 

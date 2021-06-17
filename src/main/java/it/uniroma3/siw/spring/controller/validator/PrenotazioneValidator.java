@@ -15,6 +15,8 @@ public class PrenotazioneValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "posti", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "data", "required");
+		
+		
 
 	
 	}

@@ -2,15 +2,20 @@ package it.uniroma3.siw.spring.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Prenotazione {
-
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -19,6 +24,7 @@ public class Prenotazione {
 	private String nome;
 	
 	@Column
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate data;
 	
 	@Column
@@ -26,6 +32,21 @@ public class Prenotazione {
 	
 	@Column 
 	private int posti;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	private Tavolo tavolo;
+	
+	
+	
+	public Tavolo getTavolo() {
+		return tavolo;
+	}
+
+	public void setTavolo(Tavolo tavolo) {
+		this.tavolo = tavolo;
+	}
+
+
 
 	public Long getId() {
 		return id;
