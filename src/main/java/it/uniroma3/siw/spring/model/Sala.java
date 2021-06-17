@@ -12,15 +12,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Sala {
 
-	//public static final Integer POSTI_MAX = 100;
+	public static final Integer POSTI_MAX = 100;
 	public static final Long ID_SALA = Long.valueOf(1);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	//@Column
-	//private int postiLiberi = POSTI_MAX.intValue();
+	@Column
+	private int postiLiberi = POSTI_MAX.intValue();
 	
 	@OneToMany
 	private List<Tavolo> tavoli;
@@ -33,17 +33,7 @@ public class Sala {
 		this.id = id;
 	}
 
-	/*public int getPostiLiberi() {
-		return postiLiberi;
-	}
 
-	public void setPostiLiberi(int postiLiberi) {
-		this.postiLiberi = postiLiberi;
-	}
-
-	public static int getPostiMax() {
-		return POSTI_MAX;
-	}*/
 
 	public List<Tavolo> getTavoli() {
 		return tavoli;
