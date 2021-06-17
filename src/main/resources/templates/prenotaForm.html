@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head"></head>
+<head>
+<link th:href="@{/css/home.css}" rel="stylesheet" />
+<title>pizzeria</title>
+</head>
+
+<body>
+	<div id="container">
+		<header th:replace="fragments/base.html :: header"></header>
+		<div id="main">
+
+
+			<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+				</div>
+
+
+				<span class="errore" th:if="${#fields.hasErrors('nome')}"
+					th:errors="*{nome}"></span> 
+
+
+
+				<strong th:text="#{form.nome}">Nome:</strong> <input  type="text" autofocus="autofocus" placeholder="Nome" th:field="*{nome}" />  <br> 
+				
+				<strong th:text="#{form.data}">Data:</strong> <input type="date" th:field="*{data}" /> <br> 
+					
+				<strong	th:text="#{form.numeroPersone}">Persone:</strong>
+				<select th:field="*{posti}">
+							<option th:each="i : ${#numbers.sequence(1, 10)}" th:text="|${i} persone|"th:value="${i}">
+						</select>
+				
+				
+				<button
+						type="submit" th:text="#{form.conferma}">Conferma</button>
+
+
+
+
+			</form>
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

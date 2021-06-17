@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head"></head>
+<head>
+<link rel="stylesheet"
+	href="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/css/Index.css">
+<link th:href="@{/css/index.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/css/Menu.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+
+<title>Pizzeria roma3</title>
+</head>
+<body id="home">
+	<header class="box">
+		<div id="navbar" class="navbar top">
+			<a class="navbar-brand" href="home.HTML"></a>
+			<h1>PIZZERIA ROMA3</h1>
+			<nav>
+				<ul>
+					<li><a href="home.html">Home</a></li>
+					<li><a href="menu.html">Menu</a></li>
+					<li><a th:href="@{/prenota}">Prenota</a></li>
+					<li><a href="contatti2.HTML">Contatti</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="content">
+			<h1>Benvenuto sulla nostra pagina!</h1>
+			<p>
+				Prenditi una pausa dallo studio e vieni ad assaggiare la nostra <strong>PIZZA!</strong>
+			</p>
+		</div>
+	</header>
+
+	<div class="container my-5 text-center">
+		<h1>PIZZA PER INFORMATICI!</h1>
+		<p class="lead">
+			Prenditi una pausa dallo studio, e vieni ad assaggiare la nostra <strong>PIZZA!</strong>
+		</p>
+	</div>
+
+	<!--header-->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				<div
+					class="card h-100 text-center text-white bg-dark mb-3 border-radius mb-3"
+					style="width: 18rem;">
+					<img src="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/menù.jpg" 
+					     class="card-img-top" height="50%" alt="">
+					<div class="card-body">
+						<h5 class="card-title">Non sai cosa ordinare? Consulta il
+							menù:</h5>
+						<p class="card-text"></p>
+						<a href="Menù.html"
+							class="btn btn-primary btn-lg border-radius-lg"> Menù</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div
+					class="card text-center h-100 text-white bg-dark mb-3 border-radius mb-3"
+					style="width: 18rem;">
+					<img src="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/prenota.png" class="card-img-top" height="50%" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Non lascarti sfuggire il posto!</h5>
+						<p class="card-text"></p>
+						<a href="#" class="btn btn-primary btn-lg border-radius-lg">Prenota</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div
+					class="card text-center h-100 text-white bg-dark mb-3 border-radius mb-3"
+					style="width: 18rem;">
+					<img src="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/contatti.png" class="card-img-top" height="50%" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">Dubbi? Domande? Non esitare a chiedere</h5>
+						<p class="card-text"></p>
+						<a href="contatti2.HTML"
+							class="btn btn-primary btn-lg border-radius-lg ">Contattaci!</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--CIBI-->
+	<div class="container my-5 py-5">
+		<div class="card-group">
+			<div class="card">
+				<img src="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/pizzi.jpeg " class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">PIZZA</h5>
+					<p class="card-text">Quella che vi proponiamo è la degustazione
+						di un alimento generato con l'arte dei pizzaioli napoletani</p>
+				</div>
+
+			</div>
+			<div class="card">
+				<img src="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/patatine.jpeg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">FRITTI</h5>
+					<p class="card-text">Quel riso nun lo buttà, che domani ce famo
+						i supplì!</p>
+				</div>
+
+			</div>
+			<div class="card">
+				<img src="J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/bevande1.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">BEVANDE</h5>
+					<p class="card-text">
+						Caldo in arrivo?<br>Vieni a prenderti una bella bibita
+						fresca!
+					</p>
+				</div>
+
+			</div>
+		</div>
+
+
+		<footer class="text-center text-lg-start bg-light text-muted a">
+			<!-- Section: Links  -->
+			<section class="">
+				<div class="container text-center text-md-start mt-5">
+					<!-- Grid row -->
+					<div class="row mt-3">
+						<!-- Grid column -->
+						<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+							<!-- Content -->
+							<h6 class="text-uppercase fw-bold mb-4">
+								<i class="fas fa-gem me-3"></i>Pizzeria Roma3
+							</h6>
+							<p>Tra una lezione e l' altra, vieni da noi per fare uno
+								spuntino!</p>
+						</div>
+						<!-- Grid column -->
+
+						<!-- Grid column -->
+						<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold mb-4">Prodotti</h6>
+							<p>
+								<a href="Menù.html" class="text-reset">Pizza</a>
+							</p>
+							<p>
+								<a href="Menù.html" class="text-reset">Fritti</a>
+							</p>
+							<p>
+								<a href="Menù.html" class="text-reset">Dolci</a>
+							</p>
+							<p>
+								<a href="Menù.html" class="text-reset">Bevande</a>
+							</p>
+						</div>
+						<!-- Grid column -->
+
+						<!-- Grid column -->
+						<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold mb-4">Prenota</h6>
+							<p>
+								<a href="#!" class="text-reset">Tavolo</a>
+							</p>
+
+						</div>
+						<!-- Grid column -->
+
+						<!-- Grid column -->
+						<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold mb-4">Contatti</h6>
+							<a href="https://goo.gl/maps/v4dND12CAFhz9EDWA"><p>
+									<i class="fas fa-home me-3"></i> Via della vasca navale 79
+								</p> </a>
+							<p>
+								<i class="fas fa-envelope me-3"></i> E-mail:
+								pizzeria_roma3@siw.it
+							</p>
+							<p>
+								<i class="fas fa-phone me-3"></i> Tel: 06 5733 3201
+							</p>
+
+						</div>
+						<!-- Grid column -->
+					</div>
+					<!-- Grid row -->
+				</div>
+			</section>
+			<!-- Section: Links  -->
+
+			<!-- Copyright -->
+			<div class="text-center p-4"
+				style="background-color: rgba(0, 0, 0, 0.05);">
+				© 2021 Copyright: <a class="text-reset fw-bold"
+					href="bootstrap.html">PizzeriaRoma3.it</a>
+			</div>
+			<!-- Copyright -->
+		</footer>
+		<!-- Footer -->
+	</div>
+
+
+
+
+
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+		crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+		</div>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

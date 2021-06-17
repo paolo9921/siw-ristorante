@@ -10,18 +10,23 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 public class Prenotazione {
 
-
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	
 	 @OneToOne
 	 private Tavolo tavolo;
 	 
+	 private String nome;
+	 
 	 @Column
+	 @DateTimeFormat(pattern="yyyy-MM-dd")
 	 private LocalDate data;
 	 
 	 @Column
@@ -67,6 +72,14 @@ public class Prenotazione {
 
 	public void setPosti(int posti) {
 		this.posti = posti;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

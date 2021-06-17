@@ -16,6 +16,14 @@ public class SalaService {
 	@Autowired
 	private SalaRepository salaRepository;
 
+	
+	@Transactional
+	public void inserisci(Sala s) {
+		this.salaRepository.save(s);
+	}
+	
+	
+	
 	@Transactional
 	public Sala salaPerId(Long id) {
 		Optional<Sala> optional = salaRepository.findById(id);
