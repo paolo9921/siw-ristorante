@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.model.Prenotazione;
+import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.repository.PrenotazioneRepository;
 
 @Service
@@ -22,19 +23,23 @@ public class PrenotazioneService {
 		return prenotazioneRepository.save(prenotazione);
 		
 	}
-
+	@Transactional
 	public Optional<Prenotazione> prenotazionePerId(Long id) {
-		
 		return this.prenotazioneRepository.findById(id);
 	}
-
+	@Transactional
 	public void cancella(Long id) {	
 		this.prenotazioneRepository.deleteById(id);
 		
 	}
-
+	@Transactional
 	public List<Prenotazione> tutti() {
 		return (List<Prenotazione>) prenotazioneRepository.findAll();
+	}
+	
+	@Transactional
+	public List<User> utentiConPrenotazione(){
+		return prenotazioneRepository.findAllUtentiId();
 	}
 
 }

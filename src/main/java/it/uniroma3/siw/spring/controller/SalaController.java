@@ -22,10 +22,19 @@ public class SalaController {
 	private SalaService salaService;
 
 	
+	
+	
+	 @RequestMapping(value = "/admin/sale", method = RequestMethod.GET)
+	    public String getSale(Model model) {
+	    	model.addAttribute("sale", this.salaService.tutti());
+	    	return "admin/sale.html";
+	    }
+	
+	
 	@RequestMapping(value="/admin/addSala", method = RequestMethod.GET)
 	public String addSala(Model model) {
 		model.addAttribute("sala", new Sala());
-		return "salaForm.html";
+		return "admin/salaForm.html";
 	}
 	
 	
@@ -37,6 +46,12 @@ public class SalaController {
 			return "index.html";
 		}
 		return "admin/salaForm.html";
+	}
+	
+	@RequestMapping(value="/admin/resetSale", method = RequestMethod.GET)
+	public String resetSale(Model model) {
+		
+		return "admin/sale.html";
 	}
 	
 }

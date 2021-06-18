@@ -52,7 +52,16 @@ public class UserService {
     public User saveUser(User user) {
         return this.userRepository.save(user);
     }
-
+    
+    //ritorna una lista di utenti data una lista di Id
+    @Transactional
+    public List<User> getAllUserById(List<Long> listaId){
+    	List<User> utenti = new ArrayList<>();
+    	for(Long id : listaId)
+    		utenti.add(getUser(id));
+    	
+    	return utenti;
+    }
     /**
      * This method retrieves all Users from the DB.
      * @return a List with all the retrieved Users

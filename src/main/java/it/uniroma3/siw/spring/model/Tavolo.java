@@ -25,6 +25,8 @@ public class Tavolo {
     @ManyToOne
     private Sala sala;
 
+    public Tavolo() {}
+    
     public Tavolo(int posti, Sala sala) {
     	this.posti=posti;
     	this.sala=sala;
