@@ -59,7 +59,7 @@ public class PrenotazioneController {
 		this.prenotazioneValidator.validate(prenotazione,sala,bindingResult);
 		if (!bindingResult.hasErrors()) {
 			
-			
+			//alla prenotazione assegno un nuovo tavolo con posti= posti della prenotazione e la sala selezionata
 			prenotazione.setTavolo(tavoloService.inserisci(new Tavolo(prenotazione.getPosti(),sala))); 
 			this.prenotazioneService.inserisci(prenotazione);
 			
@@ -70,7 +70,9 @@ public class PrenotazioneController {
 	
 	@RequestMapping(value ="/deletePrenotazione/{id}",method = RequestMethod.GET)
 	public String cancellaPrenotazione(@PathVariable("id") Long id, Model model) {
+		//aumentare posti nella sala
 		this.prenotazioneService.cancella(id);
+		
 		return "index.html";
 	}
 }
