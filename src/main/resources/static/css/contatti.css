@@ -62,7 +62,7 @@ ul{
 
 .box{
 	height: 100vh;
-	background: url(J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/contattaci.jpg) no-repeat center center;
+	background: url(/images/contattaci.jpg) no-repeat center center;
 	background-size: cover;
 	position: relative;
 	color: white;
