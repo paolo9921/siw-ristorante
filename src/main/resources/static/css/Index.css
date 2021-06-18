@@ -3,10 +3,10 @@
 
 .box{
 	height: 100vh;
-	background: url(J:/progetto-siw-2021/siw-ristorante/src/main/resources/static/images/pizza10.jpeg) no-repeat center center;
+	background: url(/images/pizza10.jpeg) no-repeat center center;
 	background-size: cover;
 	position: relative;
-	
+	color: white;
 }
 
 .box .content{
