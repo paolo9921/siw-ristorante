@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head"></head>
+<head>
+<link th:href="@{/css/index.css}" rel="stylesheet" />
+<title>admin page</title>
+</head>
+
+<body>
+<div id="container">
+	<header th:replace="fragments/base.html :: header"></header>
+	
+		<h2 id="titolo" th:text="#{admin_home.caption}">cosa vuoi fare:</h2>
+		<div class="primoElemento">
+			<a class="elenco" th:href="@{/admin/collezioni}">visualizza prenotazioni</a>
+   		</div>
+   		<div>
+			<a class="elenco" th:href="@{/admin/artisti}">visualizza sale</a>
+   		</div>
+   		<div>
+			<a class="elenco" th:href="@{/addProdotto}">aggiungi piatto</a>
+   		</div>
+   		<div>
+			<a class="elenco" th:href="@{/admin/addProdotto}">reset</a>
+   		</div>
+			<a class="elenco" th:href="@{/logout}">Logout</a>
+   		</div>
+		
+
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+</html>

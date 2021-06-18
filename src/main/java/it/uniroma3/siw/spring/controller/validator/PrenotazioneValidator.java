@@ -21,7 +21,7 @@ public class PrenotazioneValidator implements Validator{
 
 	
 	public void validate(Prenotazione prenotazione, Sala sala, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "required");
+		
 		sala.setPostiLiberi(prenotazione.getPosti());
 		if(sala.getPostiLiberi() < 0)
 			errors.reject("pieno");

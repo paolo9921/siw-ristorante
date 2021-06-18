@@ -17,14 +17,15 @@
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
-
+				
+				<input type="hidden" th:field="*{utente}" th:value="${user}">
+				
+				
 
 				<span class="errore" th:if="${#fields.hasErrors('nome')}"
 					th:errors="*{nome}"></span> 
 
-
-
-				<strong th:text="#{form.nome}">Nome:</strong> <input  type="text" autofocus="autofocus" placeholder="Nome" th:field="*{nome}" />  <br> 
+				
 				
 				<strong th:text="#{form.data}">Data:</strong> <input type="date" th:field="*{data}" /> <br> 
 					
@@ -41,7 +42,8 @@
 				<button
 						type="submit" th:text="#{form.conferma}">Conferma</button>
 
-
+		
+			
 
 
 			</form>

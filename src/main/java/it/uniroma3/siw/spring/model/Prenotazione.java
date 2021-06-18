@@ -33,6 +33,9 @@ public class Prenotazione {
 	 private String orario;
 	 
 	 private int posti;
+	 
+	 @OneToOne
+	 private User utente;
 
 	 /*@OneToOne
 	 private Sala sala;
@@ -92,6 +95,14 @@ public class Prenotazione {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public User getUtente() {
+		return utente;
+	}
+
+	public void setUtente(User utente) {
+		this.utente = utente;
 	}
 
 

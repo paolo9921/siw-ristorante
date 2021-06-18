@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,9 @@ public class UserService {
 
     @Autowired
     protected UserRepository userRepository;
+    
+    @Autowired
+    private CredentialsService credentialsService;
 
     /**
      * This method retrieves a User from the DB based on its ID.
@@ -31,7 +35,12 @@ public class UserService {
         Optional<User> result = this.userRepository.findById(id);
         return result.orElse(null);
     }
-
+    
+    @Transactional
+    public User getUserCorrente() {
+    	String username = ((org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+    	return credentialsService.getCredentials(username).getUser();
+    }
     /**
      * This method saves a User in the DB.
      * @param user the User to save into the DB
