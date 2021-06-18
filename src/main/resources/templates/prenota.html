@@ -10,18 +10,14 @@
 	<div id="container">
 		<header th:replace="fragments/base.html :: header"></header>
 		<div id="main">
-					
-			
+				
 
 			<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
+			
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
 				
-				<input type="hidden" th:field="*{utente}" th:value="${user}">
-				
-				
-
 				<span class="errore" th:if="${#fields.hasErrors('nome')}"
 					th:errors="*{nome}"></span> 
 

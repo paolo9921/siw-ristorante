@@ -57,8 +57,8 @@ public class PrenotazioneController {
 		
 		model.addAttribute("prenotazione", new Prenotazione());
 		
-		model.addAttribute("user",(userService.getUserCorrente()));
-		logger.debug("**********user: "+userService.getUserCorrente().toString() +"nome: "+userService.getUserCorrente().getNome());
+		//model.addAttribute("user",(userService.getUserCorrente()));
+		//logger.debug("**********user: "+userService.getUserCorrente().toString() +"nome: "+userService.getUserCorrente().getNome());
 		
 		model.addAttribute("sale", this.salaService.tutti());
 		return "prenota.html";
@@ -74,6 +74,9 @@ public class PrenotazioneController {
 			
 			//alla prenotazione assegno un nuovo tavolo con posti= posti della prenotazione e la sala selezionata
 			prenotazione.setTavolo(tavoloService.inserisci(new Tavolo(prenotazione.getPosti(),sala))); 
+			prenotazione.setUtente(userService.getUserCorrente());
+			logger.debug("**********user: "+userService.getUserCorrente().toString() +"nome: "+userService.getUserCorrente().getNome());
+			//prenotazione.setNome(prenotazione.getUtente().getUsername());
 			//prenotazione.setNome(prenotazione.getUtente().getUsername());
 			this.prenotazioneService.inserisci(prenotazione);
 			
