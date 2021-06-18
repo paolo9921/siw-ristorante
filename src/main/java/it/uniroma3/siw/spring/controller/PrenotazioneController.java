@@ -76,8 +76,7 @@ public class PrenotazioneController {
 			prenotazione.setTavolo(tavoloService.inserisci(new Tavolo(prenotazione.getPosti(),sala))); 
 			prenotazione.setUtente(userService.getUserCorrente());
 			logger.debug("**********user: "+userService.getUserCorrente().toString() +"nome: "+userService.getUserCorrente().getNome());
-			//prenotazione.setNome(prenotazione.getUtente().getUsername());
-			//prenotazione.setNome(prenotazione.getUtente().getUsername());
+			
 			this.prenotazioneService.inserisci(prenotazione);
 			
 			return "index.html";
@@ -93,4 +92,17 @@ public class PrenotazioneController {
 		
 		return "index.html";
 	}
+	
+	
+	
+	/*		ADMIN		*/
+	
+	@RequestMapping(value ="/admin/prenotazioni",method = RequestMethod.GET)
+	public String getPrenotazioni(Model model) {
+		model.addAttribute("prenotazioni",this.prenotazioneService.tutti());
+		return "admin/prenotazioni.html";
+	}
+	
+	
+	
 }

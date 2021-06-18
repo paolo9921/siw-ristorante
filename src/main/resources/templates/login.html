@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="container">
-<header><h1 id="titolo">Museo del Torrino</h1></header>
+<header th:replace="fragments/base.html :: header"></header>
 	<div id="main">
 		<h1 id="h1" th:text="#{login.secondTitle}">Login page</h1>
 		<h2 th:text="#{login.caption}">accedi per navigare nel sito</h2>

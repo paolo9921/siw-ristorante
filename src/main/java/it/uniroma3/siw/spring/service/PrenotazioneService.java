@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -30,6 +31,10 @@ public class PrenotazioneService {
 	public void cancella(Long id) {	
 		this.prenotazioneRepository.deleteById(id);
 		
+	}
+
+	public List<Prenotazione> tutti() {
+		return (List<Prenotazione>) prenotazioneRepository.findAll();
 	}
 
 }
