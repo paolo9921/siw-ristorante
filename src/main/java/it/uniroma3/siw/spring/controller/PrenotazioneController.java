@@ -71,6 +71,7 @@ public class PrenotazioneController {
 	@RequestMapping(value ="/deletePrenotazione/{id}",method = RequestMethod.GET)
 	public String cancellaPrenotazione(@PathVariable("id") Long id, Model model) {
 		//aumentare posti nella sala
+		//this.salaService.salaPerId(  (Prenotazione)prenotazioneService.prenotazionePerId(id)    )
 		this.prenotazioneService.cancella(id);
 		
 		return "index.html";
