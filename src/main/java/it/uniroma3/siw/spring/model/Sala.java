@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Sala {
 	
 	public int postiLiberi;
 	
-	@OneToMany
+	@OneToMany(mappedBy ="sala",cascade = {CascadeType.REMOVE})
 	private List<Tavolo> tavoli;
 
 	
@@ -67,8 +68,12 @@ public class Sala {
 	public int getPostiLiberi() {
 		return postiLiberi;
 	}
-
-	public void setPostiLiberi(int postiPrenotazione) {
+	
+	public void setPostiLiberi(int posti) {
+		this.postiLiberi = posti;
+	}
+	
+	public void riduciPostiLiberi(int postiPrenotazione) {
 		this.postiLiberi -= postiPrenotazione;
 	}
 	

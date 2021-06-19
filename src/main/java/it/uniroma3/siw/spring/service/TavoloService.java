@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +19,14 @@ public class TavoloService {
 	@Transactional
 	public Tavolo inserisci(Tavolo t) {
 		return tavoloRepository.save(t);
+	}
+	
+	@Transactional
+	public void deleteAll() {
+		tavoloRepository.deleteAll();
+	}
+
+	public List<Tavolo> tutti() {
+		return (List<Tavolo>) tavoloRepository.findAll();
 	}
 }

@@ -1,13 +1,10 @@
 package it.uniroma3.siw.spring.controller;
 
-import it.uniroma3.siw.spring.model.Sala;
-import it.uniroma3.siw.spring.model.Tavolo;
-import it.uniroma3.siw.spring.model.User;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.controller.validator.PrenotazioneValidator;
 import it.uniroma3.siw.spring.model.Prenotazione;
+import it.uniroma3.siw.spring.model.Sala;
+import it.uniroma3.siw.spring.model.Tavolo;
 import it.uniroma3.siw.spring.service.CredentialsService;
 import it.uniroma3.siw.spring.service.PrenotazioneService;
 import it.uniroma3.siw.spring.service.SalaService;
@@ -44,8 +43,6 @@ public class PrenotazioneController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private CredentialsService credentialsService;
 	
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -84,13 +81,16 @@ public class PrenotazioneController {
 		return "prenota.html";
 	}
 	
-	@RequestMapping(value ="/deletePrenotazione/{id}",method = RequestMethod.GET)
+	@RequestMapping(value ="/prenotazioni/deletePrenotazione/{id}",method = RequestMethod.GET)
 	public String cancellaPrenotazione(@PathVariable("id") Long id, Model model) {
-		//aumentare posti nella sala
-		//this.salaService.salaPerId(  (Prenotazione)prenotazioneService.prenotazionePerId(id)    )
+		
+		Prenotazione p = prenotazioneService.prenotazionePerId(id);
+		//riduco i posti nella sala
+		p.getTavolo().getSala().riduciPostiLiberi(-p.getPosti());
 		this.prenotazioneService.cancella(id);
 		
-		return "index.html";
+		model.addAttribute("prenotazioni",prenotazioneService.tutti());
+		return "admin/prenotazioni.html";
 	}
 	
 	
@@ -100,6 +100,9 @@ public class PrenotazioneController {
 	@RequestMapping(value ="/admin/prenotazioni",method = RequestMethod.GET)
 	public String getPrenotazioni(Model model) {
 		model.addAttribute("prenotazioni",this.prenotazioneService.tutti());
+		model.addAttribute("utenti",prenotazioneService.utentiConPrenotazione());
+		model.addAttribute("tavoli",tavoloService.tutti());
+		model.addAttribute("sale",salaService.tutti());
 		return "admin/prenotazioni.html";
 	}
 	
