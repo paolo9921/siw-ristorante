@@ -22,7 +22,7 @@ public class PrenotazioneValidator implements Validator{
 	
 	public void validate(Prenotazione prenotazione, Sala sala, Errors errors) {
 		
-		sala.setPostiLiberi(prenotazione.getPosti());
+		sala.riduciPostiLiberi(prenotazione.getPosti());
 		if(sala.getPostiLiberi() < 0)
 			errors.reject("pieno");
 			

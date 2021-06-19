@@ -43,8 +43,6 @@ public class PrenotazioneController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private CredentialsService credentialsService;
 	
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -83,13 +81,16 @@ public class PrenotazioneController {
 		return "prenota.html";
 	}
 	
-	@RequestMapping(value ="/deletePrenotazione/{id}",method = RequestMethod.GET)
+	@RequestMapping(value ="/prenotazioni/deletePrenotazione/{id}",method = RequestMethod.GET)
 	public String cancellaPrenotazione(@PathVariable("id") Long id, Model model) {
-		//aumentare posti nella sala
-		//this.salaService.salaPerId(  (Prenotazione)prenotazioneService.prenotazionePerId(id)    )
+		
+		Prenotazione p = prenotazioneService.prenotazionePerId(id);
+		//riduco i posti nella sala
+		p.getTavolo().getSala().riduciPostiLiberi(-p.getPosti());
 		this.prenotazioneService.cancella(id);
 		
-		return "index.html";
+		model.addAttribute("prenotazioni",prenotazioneService.tutti());
+		return "admin/prenotazioni.html";
 	}
 	
 	
@@ -98,9 +99,10 @@ public class PrenotazioneController {
 	
 	@RequestMapping(value ="/admin/prenotazioni",method = RequestMethod.GET)
 	public String getPrenotazioni(Model model) {
-		logger.debug("*****************sto qua");
 		model.addAttribute("prenotazioni",this.prenotazioneService.tutti());
 		model.addAttribute("utenti",prenotazioneService.utentiConPrenotazione());
+		model.addAttribute("tavoli",tavoloService.tutti());
+		model.addAttribute("sale",salaService.tutti());
 		return "admin/prenotazioni.html";
 	}
 	
