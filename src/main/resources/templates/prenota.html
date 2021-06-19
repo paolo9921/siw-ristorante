@@ -44,20 +44,21 @@
 
 				
 				
-				<strong th:text="#{form.data}">Data:</strong> <input type="date" th:field="*{data}" /> <br> 
+				<strong>Data:</strong> <input type="date" th:field="*{data}" />
+				<strong>Orario: </strong><input type="time" th:field=*{orario}>
 					
-				<strong	th:text="#{form.numeroPersone}">Persone:</strong>
+				<strong>Persone:</strong>
 				<select th:field="*{posti}">
 							<option th:each="i : ${#numbers.sequence(1, 10)}" th:text="|${i} persone|"th:value="${i}">
 						</select>
 				
-				<strong	th:text="#{form.sala}"></strong>
+				<strong>Sala: </strong>
 				<select name="salaSelezionata">
 							<option th:each="sala : ${sale}" th:text="${sala.nome}" th:value="${sala.id}">
 						</select>
 				
 				<button
-						type="submit" th:text="#{form.conferma}">Conferma</button>
+						type="submit">Conferma</button>
 
 		
 			
