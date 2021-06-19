@@ -21,6 +21,7 @@ a{
 h1{
 	font-weight: 300; 
 	font-family: 'Roboto', sans-serif;
+	text-decoration:none;
 
 }
 p{
@@ -34,16 +35,13 @@ ul{
 
 
 
-img{
-	width: 100%;
-}
 
 
 .navbar{
 	background-color: black;
 	padding: 0 40px;
 	display: flex;
-   justify-content: center;
+    justify-content: center;
 	text-align: center;
 	align-items: center;
 	color: white;

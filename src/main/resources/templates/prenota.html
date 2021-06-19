@@ -2,19 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/base.html :: head"></head>
 <head>
-<link th:href="@{/css/Index.css}" rel="stylesheet" />
+<link th:href="@{/css/base.css}" rel="stylesheet" />
+<link th:href="@{/css/prenota.css}" rel="stylesheet" />
+<link rel="stylesheet" href="/css/prenota.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
 	  integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-<title>Pizzeria roma3</title>
+<title>Prenota</title>
 
 
-<title>pizzeria</title>
+
 </head>
 
 <body>
-	<div id="container">
-		<header th:replace="fragments/base.html :: header"></header>
+	
+		<header class="box">
+		<div th:replace="fragments/base.html :: navbar"></div>
+		
+	<div class="position-absolute top-0 left-0">
+		<button type="button" class="btn btn-link  btn-sm " onclick="goBack()">Torna
+			indietro</button>
+
+		<script>
+			function goBack() {
+				window.history.back();
+			}
+		</script>
+	</div>
+	</header>
 		<div id="main">
 				
 
@@ -50,8 +65,7 @@
 
 			</form>
 </div>
-	</div>
-	
+
 	<div th:replace="fragments/base.html :: footer"></div>
 </body>
 </html>
