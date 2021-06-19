@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +22,8 @@ public class Prenotazione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	
-	 @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)	 
+	 @OneToOne(cascade =CascadeType.ALL)	
+	 @JoinColumn
 	 private Tavolo tavolo;
 	 
 	 private String nome;

@@ -1,6 +1,7 @@
 
 package it.uniroma3.siw.spring.model;
  
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,9 @@ public class Tavolo {
 
     @OneToOne
     private Ordine ordine;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Prenotazione prenotazione;
     
     @ManyToOne
     private Sala sala;

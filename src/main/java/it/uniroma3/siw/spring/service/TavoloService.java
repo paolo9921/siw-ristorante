@@ -25,7 +25,7 @@ public class TavoloService {
 	public void deleteAll() {
 		tavoloRepository.deleteAll();
 	}
-
+	@Transactional
 	public List<Tavolo> tutti() {
 		return (List<Tavolo>) tavoloRepository.findAll();
 	}

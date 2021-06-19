@@ -27,6 +27,9 @@ public class User{
 	@OneToOne(cascade = CascadeType.ALL)
 	private Credentials credentials;
 	
+	@OneToOne
+	private Prenotazione prenotazione;
+	
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +56,22 @@ public class User{
 
 	public String getUsername() {
 		return credentials.getUsername();
+	}
+
+	public Credentials getCredentials() {
+		return credentials;
+	}
+
+	public void setCredentials(Credentials credentials) {
+		this.credentials = credentials;
+	}
+
+	public Prenotazione getPrenotazione() {
+		return prenotazione;
+	}
+
+	public void setPrenotazione(Prenotazione prenotazione) {
+		this.prenotazione = prenotazione;
 	}
 
 }
