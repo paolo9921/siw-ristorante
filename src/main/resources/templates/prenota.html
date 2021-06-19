@@ -29,11 +29,8 @@
 			}
 		</script>
 	</div>
-	</header>
-		<div id="main">
-				
-
-			<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
+	<div class="content">
+	<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
 			
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
@@ -44,20 +41,21 @@
 
 				
 				
-				<strong th:text="#{form.data}">Data:</strong> <input type="date" th:field="*{data}" /> <br> 
+				<strong>Data:</strong> <input type="date" th:field="*{data}" />
+				<strong>Orario: </strong><input type="time" th:field=*{orario}>
 					
-				<strong	th:text="#{form.numeroPersone}">Persone:</strong>
+				<strong>Persone:</strong>
 				<select th:field="*{posti}">
 							<option th:each="i : ${#numbers.sequence(1, 10)}" th:text="|${i} persone|"th:value="${i}">
 						</select>
 				
-				<strong	th:text="#{form.sala}"></strong>
+				<strong>Sala: </strong>
 				<select name="salaSelezionata">
 							<option th:each="sala : ${sale}" th:text="${sala.nome}" th:value="${sala.id}">
 						</select>
 				
 				<button
-						type="submit" th:text="#{form.conferma}">Conferma</button>
+						type="submit">Conferma</button>
 
 		
 			
@@ -65,6 +63,52 @@
 
 			</form>
 </div>
+	
+                 
+
+                </div>
+
+	</header>
+	
+	
+	<!--                 <form  method="post">
+               <table width="100%" border="0">
+                  <tr>
+                    
+                    <td colspan="2"><b> Prenota il tuo tavolo!</b><br></td>
+                  </tr>
+                  
+                  
+                  <tr> 
+                    <td align="right"> Data: </td>
+                    <td>
+                      <select name="Data:"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+                      
+                      <select name="mesearrivo"><option value="1">gennaio</option><option value="2">febbraio</option><option value="3">marzo</option><option value="4">aprile</option><option value="5">maggio</option><option value="6">giugno</option><option value="7">luglio</option><option value="8">agosto</option><option value="9">settembre</option><option value="10">ottobre</option><option value="11">novembre</option><option value="12">dicembre</option></select>
+                      <select name="annoarrivo"><option value="2021" selected>2021</option><option value="2022" >2022</option></select>
+                    </td>
+                    <td> </td>
+                  </tr>
+                  
+                  <tr>
+                    <td align="right">Persone: </td>
+                    <td>
+                      <select name="numeroadulti"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option></select>
+                         
+                    </td>
+                    <td> </td>
+                  </tr>
+                  
+                  </table>
+                  <button type="submit" >Conferma</button>
+                </form> -->
+	
+	 <!-- <div id="main">
+				
+
+			
+-->
+
 
 	<div th:replace="fragments/base.html :: footer"></div>
 </body>

@@ -63,3 +63,23 @@ p{
   
   border-bottom: 2px solid rgb(215, 8, 8);
 }
+
+
+.box{
+	height: 100vh;
+	background: url(/images/prenotare.jpg) no-repeat center center;
+	background-size: cover;
+	position: relative;
+	color: white;
+
+}
+
+
+div.content{
+	padding:10px;
+	color: white;
+	font-size: xx-large;
+	
+	}
+	
+
