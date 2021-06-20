@@ -72,11 +72,11 @@ p{
 	background: url(/images/login.jpg) no-repeat center center;
 	background-size: cover;
 	position: relative;
-	color: white;
+	color: black;
 	opacity: 0.9;
 	}
 	
-	div.login{
+	div.register{
 	  
   align-items: center;
   padding-top: 100px;
@@ -114,3 +114,6 @@ p{
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+
+	
