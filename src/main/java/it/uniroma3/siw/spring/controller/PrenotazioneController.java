@@ -75,8 +75,8 @@ public class PrenotazioneController {
 			logger.debug("**********user: "+userService.getUserCorrente().toString() +"nome: "+userService.getUserCorrente().getNome());
 			
 			this.prenotazioneService.inserisci(prenotazione);
-			
-			return "index.html";
+			model.addAttribute(prenotazione);
+			return "prenotazioneConfermata.html";
 		}
 		return "prenota.html";
 	}
