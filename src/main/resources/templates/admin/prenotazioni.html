@@ -1,100 +1,68 @@
-<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- head th:replace="fragments/base.html :: head"></head>-->
+<head th:replace="fragments/admin_base.html :: head"></head>
 <head>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
-<!--  <link th:href="@{/css/index.css}" rel="stylesheet" />-->
+<link th:href="@{/css/prenotazioni.css}" rel="stylesheet" />
 <title>admin page</title>
 </head>
 
 <body>
-	<div id="container">
+<header th:replace="fragments/admin_base :: header"></header>
+	
+	<div class="container">
 
-
-		<h2 id="titolo">prenotazioni:</h2>
+		<h2 th:if="${visualizzaSala}" th:text="|prenotazioni sala: ${visualizzaSala.nome}|"></h2>
+		<h2 th:unless="${visualizzaSala}" id="titolo">prenotazioni:</h2>
 
 
 		<table class="table table-striped table-dark table-hover">
 			<thead>
 				<tr>
-					<th scope="col">Nome</th>
 					<th scope="col">Data</th>
 					<th scope="col">Orario</th>
 					<th scope="col">Sala</th>
 					<th scope="col">Posti</th>
+					<th scope="col">Posti liberi in sala</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Note</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="prenotazione : ${prenotazioni}">
-					<td th:text="${prenotazione.utente.nome}"></td>
+				<tr th:each="prenotazione : ${prenotazioni}" >
 					<td th:text="${prenotazione.data}"></td>
 					<td th:text="${prenotazione.orario}"></td>
 					<td th:text="${prenotazione.tavolo.sala.nome}"></td>
 					<td th:text="${prenotazione.posti}"></td>
-					
+ 					<td th:text="|${prenotazione.salaDataOra.postiLiberi} / ${prenotazione.tavolo.sala.postiTotali}|"></td>
+					<td th:text="${prenotazione.utente.nome}"></td>
+					<td th:text="${prenotazione.nota}"></td>
 				</tr>
 
 			</tbody>
 		</table>
+		
+		<form th:action="@{/admin/prenotazioniData}" method="GET">
+			<input th:name="dataSelezionata" type="date" autofocus="autofocus">
+			<button type="submit">Visualizza prenotazioni per data</button>
+		</form>
+		<form th:action="@{/admin/prenotazioniSala}" method="GET">
+			<select name="salaSelezionata">
+							<option th:if="${visualizzaSala}" th:text="${visualizzaSala.nome}">
+							<option th:each="sala : ${sale}" th:text="${sala.nome}" th:value="${sala.id}">
+						</select>
+			<button type="submit">Visualizza prenotazioni per sala</button>
+		</form>
 
 	</div>
 
 
 	
 </body>
-=======
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<!-- head th:replace="fragments/base.html :: head"></head>-->
-<head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-	crossorigin="anonymous">
-<!--  <link th:href="@{/css/index.css}" rel="stylesheet" />-->
-<title>admin page</title>
-</head>
-
-<body>
-	<div id="container">
-
-
-		<h2 id="titolo">prenotazioni:</h2>
-
-
-		<table class="table table-striped table-dark table-hover">
-			<thead>
-				<tr>
-					<th scope="col">Nome</th>
-					<th scope="col">Data</th>
-					<th scope="col">Orario</th>
-					<th scope="col">Sala</th>
-					<th scope="col">Posti</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="prenotazione : ${prenotazioni}">
-					<td th:text="${prenotazione.utente.nome}"></td>
-					<td th:text="${prenotazione.data}"></td>
-					<td th:text="${prenotazione.orario}"></td>
-					<td th:text="${prenotazione.tavolo.sala.nome}"></td>
-					<td th:text="${prenotazione.posti}"></td>
-					
-				</tr>
-
-			</tbody>
-		</table>
-
-	</div>
-
-
-	<footer th:replace="fragments/admin_base.html :: footer"></footer>
-</body>
->>>>>>> Stashed changes
 </html>
+
+

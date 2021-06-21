@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,24 +14,26 @@ import javax.persistence.OneToMany;
 @Entity
 public class Sala {
 
-	//public static final Integer POSTI_MAX = 100;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(nullable = false)
-	private int postiTotali;// = 10;//POSTI_MAX.intValue();
+	private int postiTotali;
 	
 	@Column(nullable = false)
 	private String nome;
 	
-	public int postiLiberi;
-	
 	@OneToMany(mappedBy ="sala",cascade = {CascadeType.REMOVE})
 	private List<Tavolo> tavoli;
-
 	
+	@OneToMany
+	private List<SalaDataOra> saleDataOra;
+	
+	@OneToMany
+	private List<Prenotazione> prenotazioni;
+	
+	private boolean attiva = true;
 	
 	public Long getId() {
 		return id;
@@ -65,17 +68,34 @@ public class Sala {
 		this.tavoli = tavoli;
 	}
 
-	public int getPostiLiberi() {
-		return postiLiberi;
+	public List<SalaDataOra> getSaleDataOra() {
+		return saleDataOra;
 	}
-	
-	public void setPostiLiberi(int posti) {
-		this.postiLiberi = posti;
+
+	public void setSaleDataOra(List<SalaDataOra> saleDataOra) {
+		this.saleDataOra = saleDataOra;
 	}
-	
+
+	public List<Prenotazione> getPrenotazioni() {
+		return prenotazioni;
+	}
+
+	public void setPrenotazioni(List<Prenotazione> prenotazioni) {
+		this.prenotazioni = prenotazioni;
+	}
+
+	public boolean isAttiva() {
+		return attiva;
+	}
+
+	public void setAttiva(boolean attiva) {
+		this.attiva = attiva;
+	}
+
+	/*
 	public void riduciPostiLiberi(int postiPrenotazione) {
 		this.postiLiberi -= postiPrenotazione;
-	}
+	}*/
 	
 	
 }

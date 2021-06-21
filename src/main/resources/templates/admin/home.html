@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- head th:replace="fragments/base.html :: head"></head>-->
+<head th:replace="fragments/admin_base.html :: head"></head>
 <head>
-<!--  <link th:href="@{/css/index.css}" rel="stylesheet" />-->
+<link th:href="@{/css/admin/admin_home.css}" rel="stylesheet" />
 <title>admin page</title>
 </head>
 
 <body>
 <div id="container">
 	
-	
+	<header th:replace="fragments/admin_base.html :: header"></header>
+	<div id="contenuto">
 		<h2 id="titolo">cosa vuoi fare:</h2>
 		
-			<a th:href="@{/admin/prenotazioni}">visualizza prenotazioni</a>
+			<a th:href="@{/admin/prenotazioni}">gestisci prenotazioni</a>
    		
-			<a th:href="@{/admin/sale}">visualizza sale</a>
+			<a th:href="@{/admin/sale}">gestisci sale</a>
    		
-			<a th:href="@{/admin/addProdotto}">aggiungi piatto</a>
+			<a th:href="@{/admin/addProdotto}">gestisci piatti</a>
    		
 			<a th:href="@{/admin/reset}">reset</a>
    		
 			<a th:href="@{/logout}">Logout</a>
-			
+	</div>
 			
    		</div>
 		
 
-	<footer th:replace="fragments/base.html :: footer"></footer>
+	
 </body>
 </html>

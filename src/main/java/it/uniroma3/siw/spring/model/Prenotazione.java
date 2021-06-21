@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,16 +40,16 @@ public class Prenotazione {
 	 @OneToOne
 	 private User utente;
 
-	 /*@OneToOne
+	 @Column
+	 private String nota;
+	 
+	 @OneToOne
+	 private SalaDataOra salaDataOra;
+	 
+	 @ManyToOne
 	 private Sala sala;
 	 
-	public Sala getSala() {
-		return sala;
-	}
 
-	public void setSala(Sala sala) {
-		this.sala = sala;
-	}*/
 
 	public long getId() {
 		return id;
@@ -106,6 +106,30 @@ public class Prenotazione {
 
 	public void setUtente(User utente) {
 		this.utente = utente;
+	}
+
+	public String getNota() {
+		return nota;
+	}
+
+	public void setNota(String nota) {
+		this.nota = nota;
+	}
+
+	public SalaDataOra getSalaDataOra() {
+		return salaDataOra;
+	}
+
+	public void setSalaDataOra(SalaDataOra salaDataOra) {
+		this.salaDataOra = salaDataOra;
+	}
+
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
 	}
 
 

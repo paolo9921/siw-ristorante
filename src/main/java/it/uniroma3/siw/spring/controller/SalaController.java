@@ -1,7 +1,5 @@
 package it.uniroma3.siw.spring.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import it.uniroma3.siw.spring.controller.validator.SalaValidator;
 import it.uniroma3.siw.spring.model.Sala;
+import it.uniroma3.siw.spring.service.PrenotazioneService;
+import it.uniroma3.siw.spring.service.SalaDataOraService;
 import it.uniroma3.siw.spring.service.SalaService;
 
 @Controller
@@ -25,6 +25,10 @@ public class SalaController {
 	
 	@Autowired
 	private SalaService salaService;
+	
+	
+	@Autowired
+	private PrenotazioneService prenotazioneService;
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -32,15 +36,18 @@ public class SalaController {
 	 @RequestMapping(value = "/admin/sale", method = RequestMethod.GET)
 	    public String getSale(Model model) {
 	    	model.addAttribute("sale", this.salaService.tutti());
+	    	//serve il new sala perche la form per aggiungere una nuova sala sta in questa pagina
+	    	model.addAttribute("sala",new Sala());
+	    	model.addAttribute("modif",false);
 	    	return "admin/sale.html";
 	    }
 	
 	
-	@RequestMapping(value="/admin/addSala", method = RequestMethod.GET)
+	/*@RequestMapping(value="/admin/addSala", method = RequestMethod.GET)
 	public String addSala(Model model) {
 		model.addAttribute("sala", new Sala());
 		return "admin/salaForm.html";
-	}
+	}*/
 	
 	
 	@RequestMapping(value = "/admin/addSala", method = RequestMethod.POST)
@@ -52,13 +59,41 @@ public class SalaController {
 			model.addAttribute("sale",salaService.tutti());
 			return "admin/sale.html";
 		}
-		return "admin/salaForm.html";
+		model.addAttribute("sale", this.salaService.tutti());
+		return "admin/sale.html";
 	}
+	
+	@RequestMapping(value = "/admin/modificaSala", method = RequestMethod.POST)
+	public String updateSala(@ModelAttribute("sala") Sala sala, Model model,BindingResult bindingResult) {
+		
+		this.salaValidator.validateModifica(sala,bindingResult);
+		if (!bindingResult.hasErrors()) {
+			this.salaService.inserisci(sala);
+			model.addAttribute("sale",salaService.tutti());
+			return "admin/sale.html";
+		}
+		model.addAttribute("sale", this.salaService.tutti());
+		model.addAttribute("modif",true);
+		return "admin/sale.html";
+	}
+	
+	
+	
+   	@RequestMapping(value = "/sale/modifica/{id}", method = RequestMethod.GET)
+	public String modificaSala(@PathVariable("id") Long id, Model model) {
+   		model.addAttribute("sale", this.salaService.tutti());
+		model.addAttribute("sala",this.salaService.salaPerId(id));
+		model.addAttribute("modif",true);
+		return "admin/sale.html";
+	}
+	
+	
 	
 	@RequestMapping(value = "/sale/delete/{id}", method = RequestMethod.GET)
 	public String deleteSala(@PathVariable("id") Long id, Model model) {
 		
-		this.salaService.cancella(id);
+		//prenotazioneService.cancellaPerSala(salaService.salaPerId(id));
+		this.salaService.salaPerId(id).setAttiva(false);
 		model.addAttribute("sale",this.salaService.tutti());
 		return "admin/sale.html";
 	}

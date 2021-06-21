@@ -1,5 +1,6 @@
 package it.uniroma3.siw.spring.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,12 +13,16 @@ import it.uniroma3.siw.spring.model.Prenotazione;
 import it.uniroma3.siw.spring.model.Sala;
 import it.uniroma3.siw.spring.model.User;
 import it.uniroma3.siw.spring.repository.PrenotazioneRepository;
+import it.uniroma3.siw.spring.repository.SalaRepository;
 
 @Service
 public class PrenotazioneService {
 
 	@Autowired
 	private PrenotazioneRepository prenotazioneRepository;
+	
+	@Autowired
+	private SalaService salaService;
 	
 	@Transactional
 	public Prenotazione inserisci(Prenotazione prenotazione) {
@@ -48,4 +53,19 @@ public class PrenotazioneService {
 		return prenotazioneRepository.findAllUtentiId();
 	}
 
+	@Transactional
+	public void cancellaPerSala(Sala sala) {
+		
+	}
+
+	@Transactional
+	public List<Prenotazione> tuttiPerData(LocalDate data) {
+		return (List<Prenotazione>) prenotazioneRepository.findAllByData(data);
+	}
+
+	@Transactional
+	public List<Prenotazione> tuttiPerSala(Long idSala) {
+		
+		return (List<Prenotazione>) prenotazioneRepository.findAllBySala(salaService.salaPerId(idSala));
+	}
 }

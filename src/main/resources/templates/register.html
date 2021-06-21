@@ -29,7 +29,8 @@
 		
 			<div class="text-center">
 				<main class="form-signin">
-
+				
+				<form th:action="@{/register}" method="POST" th:object="${user}">
 					<img class="mb-4" src="/images/roma3.jpg" alt="" width="72"
 						height="57">
 					<h2 class="h3 mb-3 fw-normal">Registrati</h2>
@@ -62,7 +63,7 @@
 
 
 					<button class="w-100 btn btn-lg btn-primary" type="submit">Registrati</button>
-					
+					</form>
 				</main>
 			</div>
 		</div>

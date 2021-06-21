@@ -20,12 +20,11 @@ public class SalaService {
 
 	@Transactional
 	public Sala inserisci(Sala s) {
-		s.setPostiLiberi(s.getPostiTotali());
 		return salaRepository.save(s);
 	}
 	@Transactional
 	public List<Sala> tutti() {
-		return (List<Sala>) salaRepository.findAll();
+		return (List<Sala>) salaRepository.findAllByOrderByNome();
 	}
 
 
@@ -53,6 +52,7 @@ public class SalaService {
 	public void cancella(Long id) {
 		salaRepository.deleteById(id);
 	}
+	
 
 
 }

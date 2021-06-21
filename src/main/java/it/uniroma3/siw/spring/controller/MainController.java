@@ -31,10 +31,10 @@ public class MainController {
 	public String resetSale(Model model) {
 		List<Sala> sale = this.salaService.tutti();
 		
-		for(Sala s : sale) {
+		/*for(Sala s : sale) {
 			s.setPostiLiberi(s.getPostiTotali());
 			tavoloService.deleteAll();
-		}
+		}*/
 		return "admin/home.html";
 	}
 	

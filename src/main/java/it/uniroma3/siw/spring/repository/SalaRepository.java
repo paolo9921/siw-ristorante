@@ -13,4 +13,6 @@ public interface SalaRepository extends CrudRepository<Sala,Long>{
 
 	public List<Sala> findByNome(String string);
 
+	public List<Sala> findAllByOrderByNome();
+
 }

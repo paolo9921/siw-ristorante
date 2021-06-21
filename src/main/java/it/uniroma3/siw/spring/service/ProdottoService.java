@@ -21,8 +21,22 @@ public class ProdottoService {
 		return prodottoRepository.save(prodotto);
 		
 	}
-
+	@Transactional
 	public List<Prodotto> tutti() {
 		return (List<Prodotto>) prodottoRepository.findAll();
 	}
+
+	@Transactional
+	public List<Prodotto> tuttiAntipasti(){
+		return prodottoRepository.findAllAntipasti();
+	}
+	@Transactional
+	public List<Prodotto> tuttiPizze(){
+		return prodottoRepository.findAllPizze();
+	}
+	@Transactional
+	public List<Prodotto> tuttiBevande(){
+		return prodottoRepository.findAllBevande();
+	}
+
 }

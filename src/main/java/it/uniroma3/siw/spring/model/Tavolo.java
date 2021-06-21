@@ -19,9 +19,6 @@ public class Tavolo {
 
     @Column(nullable = false)
     private int posti;
-
-    @OneToOne
-    private Ordine ordine;
     
     @OneToOne(cascade = CascadeType.ALL)
     private Prenotazione prenotazione;
@@ -52,13 +49,6 @@ public class Tavolo {
 		this.posti = posti;
 	}
 
-	public Ordine getOrdine() {
-		return ordine;
-	}
-
-	public void setOrdine(Ordine ordine) {
-		this.ordine = ordine;
-	}
 
 	public Sala getSala() {
 		return sala;
