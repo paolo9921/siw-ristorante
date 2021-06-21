@@ -21,7 +21,7 @@ public class SalaDataOra {
 	private Long id;
 	
 	@Column
-	public int postiLiberi;
+	public int postiLiberi=0;
 	
 	@ManyToOne
 	private Sala sala;

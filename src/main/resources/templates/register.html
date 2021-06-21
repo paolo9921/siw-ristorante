@@ -28,49 +28,64 @@
 		<div class="register position-absolute top-50 start-50 translate-middle-y">
 		
 			<div class="text-center">
-				<main class="form-signin">
+				
 				
 				<form th:action="@{/register}" method="POST" th:object="${user}">
+				<div th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+				</div>
+				<span class="errore" th:if="${#fields.hasErrors('nome')}"
+							th:errors="*{nome}"></span>
+							
 					<img class="mb-4" src="/images/roma3.jpg" alt="" width="72"
 						height="57">
 					<h2 class="h3 mb-3 fw-normal">Registrati</h2>
+					
 					<div class="form-floating">
 
-						<input  type="text" class="form-control" id="floatingInput"
+
+						<input class="form-control" id="floatingInput"
+							type="text" name="nome" autofocus="autofocus"
+							placeholder="Nome">
+							<label for="floatingInput">Nome</label>
+					</div>
+						<!-- <input  type="text" class="form-control" id="floatingInput"
 							placeholder="nome" autofocus="autofocus" name="username">
 						<label for="floatingInput">Nome</label>
-					</div>
+					</div>-->
 					<div class="form-floating">
 
 						<input  
 							type="text" class="form-control" id="floatingInput"
-							placeholder="username" autofocus="autofocus" name="username">
-						<label for="floatingInput">Cognome</label>
+							placeholder="username" autofocus="autofocus" name="cognome">
+							<label for="floatingInput">Cognome</label>
+						
 					</div>
-					<div class="form-floating">
+					<div th:object="${credentials}">
+					<div class="form-floating" >
 
 						<input th:field="${credentials.username}" type="text"
 							class="form-control" id="floatingInput" placeholder="username"
-							autofocus="autofocus" name="username"> <label
-							for="floatingInput">Username</label>
+							autofocus="autofocus" name="username">
+							<label for="floatingInput">Username</label>
 					</div>
 					<div class="form-floating">
 						<input th:field="${credentials.password}" type="password"
 							class="form-control" id="floatingPassword" placeholder="Password"
-							autofocus="autofocus" name="password"> <label
-							for="floatingPassword">Password</label>
+							autofocus="autofocus" name="password"> 
+							<label for="floatingInput">Password</label>
 					</div>
 
-
+				</div>
 					<button class="w-100 btn btn-lg btn-primary" type="submit">Registrati</button>
 					</form>
-				</main>
+				
 			</div>
 		</div>
 	</header>
 
-<!-- 
-<div id="container">
+
+<!-- <div id="container">
 
 		<div id="main">
 			<h1 id="caption" th:text="#{register.caption}"></h1>
@@ -88,25 +103,26 @@
 						<span class="errore" th:if="${#fields.hasErrors('cognome')}"
 							th:errors="*{cognome}"></span>
 					</div>
-				</div>
+				</div>-->
 
 
-
-				<div class="riga">
-					<div class="allinea">
-						<strong th:text="#{register.name}">Nome:</strong><br> <input
+<img class="mb-4" src="/images/roma3.jpg" alt="" width="72"
+						height="57">
+					<h2 class="h3 mb-3 fw-normal">Registrati</h2>
+					
+					<div class="form-floating">
+						<strong>Nome:</strong><br> <input
 							type="text" class="input" name="nome" autofocus="autofocus"
 							placeholder="Nome">
 					</div>
 
 
-					<div class="allinea">
+					
 						<strong th:text="#{register.surname}">Cognome:</strong><br> <input
 							type="text" class="input" name="cognome" autofocus="autofocus"
 							placeholder="Cognome">
-					</div>
-
-				</div>
+					
+				
 
 				<div class="riga" th:object="${credentials}">
 					<div class="allinea">
@@ -131,7 +147,6 @@
 
 		</div>
 	</div>
-	 -->
 
 
 
