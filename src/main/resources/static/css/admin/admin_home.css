@@ -1,11 +1,120 @@
-#contenuto{
-	margin-top:10%;
-	text-align:center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
-#contenuto a{
-	display:block;
-	width: 50%;
-	height: 50px;
-	color: red;
-	border: 1px solid black;
+
+body{
+  color: black;
+  line-height: 1.5;
+  font-family: 'Roboto', sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+}
+
+h1{
+  font-weight: 300; 
+  font-family: 'Roboto', sans-serif;
+}
+p{
+  font-family: 'Roboto', sans-serif;
+}
+ul{
+  list-style: none;
+}
+p{
+  margin: 10px 0;
+}
+
+.navbar{
+  background-color: black;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  color: white;
+  opacity: 0.8;
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  transition: 1s;
+}
+.navbar ul{
+  display: flex;
+   
+}
+.navbar ul li a{
+  padding: 10px;
+  margin-right: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 150%;
+}
+
+.navbar ul li a:hover{
+  
+  border-bottom: 2px solid rgb(215, 8, 8);
+}
+
+
+.box{
+	height: 100vh;
+	background: url(/images/admin.jpg) no-repeat center center;
+	background-size: cover;
+	position: relative;
+	color: white;
+
+}
+
+.box .content{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	padding: 0 20px;
+	height: 100%;
+}
+
+.box .content h1{
+	font-size: 40px;
+}
+
+.box .content p{
+	font-size: 20px;
+	max-width: 700px;
+	margin:20px;
+}
+
+.box::before{ 
+   content: "";
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   background: black;
+   opacity: 0.4;
+    }
+
+    .box *{
+    	z-index: 4;
+    }
+.box .content h1{
+	color:red;
+	padding:5px;
+	justify-content: space-between;
+	margin:10px;
+	text-decoration: underline;
+	
+	
+}
+
+
 }

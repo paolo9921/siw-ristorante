@@ -3,19 +3,21 @@
 <head th:fragment="head">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8" />
-	<link th:href="@{/css/base.css}" rel="stylesheet">
+	
+	<link rel="stylesheet" href="/css/admin/admin_base.css">
 	<title>PIZZERIA </title>
 </head>
 <body>
-	<div id="container">
+	<div >
 		<header th:fragment="header">
 		
 		
 		<div id="navbar" class="navbar top" th:fragment="navbar">
 			<a class="navbar-brand" href="home.HTML"></a>
-			<h1>PIZZERIA ROMA3 - admin</h1>
-			<nav>
-				<ul>
+			<h1>Admin</h1>
+			<nav >
+				<ul >
+				
 					<li><a th:href="@{/default}">Admin Home</a></li>
 					<li><a href="/">Home Page</a></li>
 					<li><a th:href="@{/logout}">Logout</a></li>

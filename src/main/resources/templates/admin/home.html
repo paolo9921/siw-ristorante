@@ -7,21 +7,31 @@
 </head>
 
 <body>
-<div id="container">
+<div class="box">
 	
 	<header th:replace="fragments/admin_base.html :: header"></header>
-	<div id="contenuto">
-		<h2 id="titolo">cosa vuoi fare:</h2>
+	<div class="content">
 		
-			<a th:href="@{/admin/prenotazioni}">gestisci prenotazioni</a>
-   		
-			<a th:href="@{/admin/sale}">gestisci sale</a>
-   		
-			<a th:href="@{/admin/addProdotto}">gestisci piatti</a>
-   		
-			<a th:href="@{/admin/reset}">reset</a>
-   		
-			<a th:href="@{/logout}">Logout</a>
+		
+			<button>				
+			<a th:href="@{/admin/prenotazioni}" class="w-100 btn btn-lg btn-primary">
+			<h1>Gestisci prenotazioni</h1></a> </button>
+   		     
+   		     <button >
+			<a th:href="@{/admin/sale}" class="w-100 btn btn-lg btn-primary"> <h1>Gestisci sale</h1>
+   		    </button>
+   		    
+   		    <button>
+			<a th:href="@{/admin/addProdotto}" class="w-100 btn btn-lg btn-primary"><h1>Gestisci piatti</h1></a>
+			</button>
+   		    
+   		    <button>
+			<a th:href="@{/admin/reset}" class="w-100 btn btn-lg btn-primary"><h1>Reset</h1></a>
+			</button>
+   		    
+   		    <button>
+			<a th:href="@{/logout}" class="w-100 btn btn-lg btn-primary" ><h1>Logout</h1></a>
+			</button>
 	</div>
 			
    		</div>
