@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{/css/base.css}" rel="stylesheet" />
+<link rel="stylesheet" href="/css/prentazioneConfermata.css">
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div th:replace="fragments/base.html :: navbar"></div>
+	<div id="main">
+		<h1>qua si ordina</h1>
+		<h2 th:text="${prenotazione.posti}"></h2>
+		
+		
+		<form th:action="@{/ordina}" method="POST" th:object="${ordine}">
+		<table class="table caption-top">
+			<caption>Antipasti</caption>
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Prodotto</th>
+					<th scope="col">Prezzo unita'</th>
+					<th scope="col">Quantita'</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="antipasto : ${antipasti}">
+					<th scope="row"></th>
+					<td th:text="${antipasto.nome}"></td>
+					<td th:text="${antipasto.prezzo}"></td>
+					<td><input type="number"></td>
+					
+				</tr>
+			</tbody>
+		</table>
+		<table class="table caption-top">
+			<caption>Pizze</caption>
+			<thead>
+				<tr>
+					
+					<th scope="col">Prodotto</th>
+					<th scope="col">Prezzo unita'</th>
+					<th scope="col">Quantita'</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr th:each="pizza : ${pizze}">
+				
+					<td></td>
+					<td th:text="${pizza.nome}"></td>
+					<td th:text="${pizza.prezzo}"></td>
+					<td><input type="number"></td>
+				
+					
+				</tr>
+				
+			</tbody>
+		</table>
+		<table class="table caption-top">
+			<caption>Bevande</caption>
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Prodotto</th>
+					<th scope="col">Prezzo unita'</th>
+					<th scope="col">Quantita'</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="bevanda : ${bevande}">
+					<th scope="row"></th>
+					<td th:text="${bevanda.nome}"></td>
+					<td th:text="${bevanda.prezzo}"></td>
+					<td><input type="number" th:field="*{prodotto}"></td>
+					
+				</tr>
+			</tbody>
+		</table>
+
+</form>
+
+
+	</div>
+
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>

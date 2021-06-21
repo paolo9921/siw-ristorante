@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/prentazioneConfermata.css">
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+	crossorigin="anonymous">
+</head>
+<body>
+		<div th:replace="fragments/base.html :: navbar"></div>
+	<div id="main" th:object="${prenotazione}">
+		<h1>Prenotazione Confermata!</h1>
+		
+		<span>Prenotazione confermata per <span th:text="*{posti}"></span> persone, il
+		<span th:text="*{data}"></span> alle <span th:text="*{orario}"></span></span>
+		<h4>note per il ristorante: </h4>
+		<span th:text="*{nota}"></span>
+
+		<h3>Consulta il nostro menu cliccando</h3>
+		<a th:href="@{/menu}">qui!</a>
+
+	</div>
+
+	<div th:replace="fragments/base.html :: footer"></div>
+</body>
+</html>
