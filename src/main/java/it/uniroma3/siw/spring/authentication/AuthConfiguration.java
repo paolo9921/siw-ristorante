@@ -42,7 +42,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
         http
                 // authorization paragraph: qui definiamo chi può accedere a cosa
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/prenota").hasAnyAuthority(DEFAULT_ROLE)
+                .antMatchers(HttpMethod.GET,"/prenota").hasAnyAuthority(DEFAULT_ROLE,ADMIN_ROLE)
                 // chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
                 .antMatchers(HttpMethod.GET, "/", "/index", "/login", "/register","/menu","/contatti", "/css/**", "/images/**").permitAll()
                 // chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register 

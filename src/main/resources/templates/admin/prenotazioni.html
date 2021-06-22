@@ -26,64 +26,75 @@
 				}
 			</script>
 		</div>
-		<div
-			class=" d-flex  flex-column position-absolute top-50 start-50 translate-middle  ">
 
 
-			<h2 th:if="${visualizzaSala}"
-				th:text="|prenotazioni sala: ${visualizzaSala.nome}|"></h2>
-			<h1 th:unless="${visualizzaSala}" id="titolo">Prenotazioni:</h1>
+		<div class="box">
+
+			<div class="d-flex flex-column">
 
 
-			<table
-				class="table table-bordered table-striped table-warning table-hover fs-4  ">
-				<thead>
-					<tr class="table-active table-dark ">
-						<th scope="col">Data</th>
-						<th scope="col">Orario</th>
-						<th scope="col">Sala</th>
-						<th scope="col">Posti</th>
-						<th scope="col">Posti liberi in sala</th>
-						<th scope="col">Nome</th>
-						<th scope="col">Note</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="prenotazione : ${prenotazioni}">
-						<td th:text="${prenotazione.data}"></td>
-						<td th:text="${prenotazione.orario}"></td>
-						<td th:text="${prenotazione.tavolo.sala.nome}"></td>
-						<td th:text="${prenotazione.posti}"></td>
-						<td
-							th:text="|${prenotazione.salaDataOra.postiLiberi} / ${prenotazione.tavolo.sala.postiTotali}|"></td>
-						<td th:text="${prenotazione.utente.nome}"></td>
-						<td th:text="${prenotazione.nota}"></td>
-					</tr>
+				<h2 th:if="${visualizzaSala}"
+					th:text="|prenotazioni sala: ${visualizzaSala.nome}|"></h2>
+				<h1 th:unless="${visualizzaSala}" id="titolo">Prenotazioni:</h1>
 
-				</tbody>
-			</table>
-			<div class="d-grid gap-4 col-6  ">
-				<form th:action="@{/admin/prenotazioniData}" method="GET">
-					<input class="btn btn-success " th:name="dataSelezionata"
-						type="date" autofocus="autofocus">
-					<button type="submit" class="btn btn-danger ">Visualizza
-						prenotazioni per data</button>
-				</form>
-				<form th:action="@{/admin/prenotazioniSala}" method="GET">
-					<select class="btn btn-success " name="salaSelezionata">
-						<option th:if="${visualizzaSala}" th:text="${visualizzaSala.nome}">
-						<option th:each="sala : ${sale}" th:text="${sala.nome}"
-							th:value="${sala.id}">
-					</select>
-					<button type="submit" class="btn btn-danger ">Visualizza
-						prenotazioni per sala</button>
-				</form>
 
+				<table
+					class="table table-bordered table-striped table-warning table-hover fs-7">
+					<thead>
+						<tr class="table-active table-dark ">
+							<th scope="col" class="colonnaMedia">Data</th>
+							<th scope="col" class="colonnaPiccola">Orario</th>
+							<th scope="col" class="colonnaMedia">Sala</th>
+							<th scope="col" class="colonnaPiccola">Posti</th>
+							<th scope="col" class="colonnaMedia">Posti liberi in sala</th>
+							<th scope="col" class="colonnaMedia">Nome</th>
+							<th scope="col">Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="7">
+								<div class="boxInterno">
+									<table class="table table-bordered table-striped table-warning table-hover fs-7">
+										<tr th:each="prenotazione : ${prenotazioni}">
+											<td class="colonnaMedia" th:text="${prenotazione.data}"></td>
+											<td class="colonnaPiccola" th:text="${prenotazione.orario}"></td>
+											<td class="colonnaMedia"th:text="${prenotazione.tavolo.sala.nome}"></td>
+											<td class="colonnaPiccola"th:text="${prenotazione.posti}"></td>
+											<td class="colonnaMedia"th:text="|${prenotazione.salaDataOra.postiLiberi} / ${prenotazione.tavolo.sala.postiTotali}|"></td>
+											<td class="colonnaMedia"th:text="${prenotazione.utente.nome}"></td>
+											<td th:text="${prenotazione.nota}"></td>
+										</tr>
+									</table>
+								</div>
+								<!-- div interno -->
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="d-grid gap-4 col-6  ">
+					<form th:action="@{/admin/prenotazioniData}" method="GET">
+						<input class="btn btn-success " th:name="dataSelezionata"
+							type="date" autofocus="autofocus">
+						<button type="submit" class="btn btn-danger ">Visualizza
+							prenotazioni per data</button>
+					</form>
+					<form th:action="@{/admin/prenotazioniSala}" method="GET">
+						<select class="btn btn-success " name="salaSelezionata">
+							<option th:if="${visualizzaSala}"
+								th:text="${visualizzaSala.nome}">
+							<option th:each="sala : ${sale}" th:text="${sala.nome}"
+								th:value="${sala.id}">
+						</select>
+						<button type="submit" class="btn btn-danger ">Visualizza
+							prenotazioni per sala</button>
+					</form>
+
+				</div>
 			</div>
 		</div>
+
 	</div>
-
-
 </body>
 </html>
 
