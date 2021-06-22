@@ -28,14 +28,14 @@
 		</div>
 
 		<div
-			class=" d-flex  flex-column position-absolute top-50 start-50 translate-middle  ">
-			<table class="table table-bordered table-striped table-dark table-hover fs-4 ">
+			class=" d-flex  flex-column position-absolute top-50 start-50 translate-middle">
+			<table class="table table-bordered table-striped table-dark table-hover fs-4">
 				<thead>
 					<tr>
 						<th scope="col">Nome</th>
 						<th scope="col">Posti Totali</th>
 						<th scope="col">
-						<th scope="col">
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -43,10 +43,7 @@
 						<td th:text="${sala.nome}"></td>
 						<td th:text="${sala.postiTotali}"></td>
 						<td><a th:href="@{'/sale/modifica'+'/'+${sala.id}}">Modifica</a></td>
-						<td th:if="${sala.attiva}"><a
-							th:href="@{'/sale/delete'+'/'+${sala.id}}">Disattiva</a></td>
-						<td th:unless="${sala.attiva}"><a
-							th:href="@{'/sale/delete'+'/'+${sala.id}}">Attiva</a></td>
+						
 
 					</tr>
 
@@ -90,8 +87,7 @@
 			</form>
 			</div>
 
-
-
+<a th:href="@{/admin/prenotazioni}"><button class="btn btn-danger">Torna all'elenco completo</button></a>
 		</div>
 	</div>
 
