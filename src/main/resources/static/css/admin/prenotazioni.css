@@ -83,8 +83,26 @@ p{
    opacity: 0.4;
     }
 
-    .flex-box *{
-    	z-index: 4;
-    }
+.flex-box *{
+	z-index: 4;
+ }
+.box{
+	width:80%;
+	margin-left:10%;
+}
+.boxInterno{
+	
+	width: 100%;
+	overflow-y: auto; 
+	max-height: 40vh;
+}
+.table table-hover{
+	width:100%;
+}
 
-
+.colonnaPiccola{
+	width:10%;
+}
+.colonnaMedia{
+	width:15%;
+}

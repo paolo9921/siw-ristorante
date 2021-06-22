@@ -61,7 +61,7 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "/logout",method = RequestMethod.GET)
 	public String logout(Model model) {
-		return "/";
+		return "index";
 	}
 
 	@RequestMapping(value = { "/register" }, method = RequestMethod.POST)
