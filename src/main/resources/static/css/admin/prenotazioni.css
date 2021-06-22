@@ -72,7 +72,7 @@ p{
 
 }
 
-.box::before{ 
+.flex-box::before{ 
    content: "";
    position: absolute;
    width: 100%;
@@ -83,7 +83,7 @@ p{
    opacity: 0.4;
     }
 
-.box *{
+.flex-box *{
 	z-index: 4;
  }
 .box{
