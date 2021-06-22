@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="/css/prentazioneConfermata.css">
+<link rel="stylesheet" href="/css/prenotazione_confermata.css">
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
@@ -10,21 +10,37 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
+	<title>Prenotazione confermata!</title>
 </head>
 <body>
+		<header class="box">
 		<div th:replace="fragments/base.html :: navbar"></div>
-	<div id="main" th:object="${prenotazione}">
-		<h1>Prenotazione Confermata!</h1>
 		
-		<span>Prenotazione confermata per <span th:text="*{posti}"></span> persone, il
-		<span th:text="*{data}"></span> alle <span th:text="*{orario}"></span></span>
-		<h4>note per il ristorante: </h4>
-		<span th:text="*{nota}"></span>
+	<div class="position-absolute top-0 left-0">
+		<button type="button" class="btn btn-link  btn-sm " onclick="goBack()">Torna
+			indietro</button>
 
-		<h3>Consulta il nostro menu cliccando</h3>
-		<a th:href="@{/menu}">qui!</a>
-
+		<script>
+			function goBack() {
+				window.history.back();
+			}
+		</script>
 	</div>
+	<div class="prenota my-5">	
+	<div id="main" th:object="${prenotazione}">
+		<h1 class="fw-bold text-decoration-underline " >Prenotazione Confermata!</h1>
+		
+		<span class="fs-2">Prenotazione confermata per <span th:text="*{posti}"></span> persone;<br>Data:
+		<span th:text="*{data}"></span> alle ore <span th:text="*{orario}"></span></span>
+		<h4>Note per il ristorante: </h4>
+		<span class="fs-4" th:text="|&quot;${prenotazione.nota}&quot;|"></span>
+
+		<h3>Consulta subito il nostro menù:<br> </h3>
+		<a th:href="@{/menu}" class="btn btn-primary btn-lg border-radius-lg"> Menù</a>
+		
+	</div>
+	</div>
+	</header>
 
 	<div th:replace="fragments/base.html :: footer"></div>
 </body>
