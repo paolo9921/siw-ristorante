@@ -7,43 +7,56 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
-<link th:href="@{/css/admin/prenotazioni.css}" rel="stylesheet" />
+<link th:href="@{/css/admin/sala.css}" rel="stylesheet" />
 <title>admin page</title>
 </head>
 
 <body>
-	<div id="container">
-	<header th:replace="fragments/admin_base.html :: header"></header>
+<body>
+	<div class="box">
 
-		<h2 id="titolo">sale:</h2>
+		<header th:replace="fragments/admin_base.html :: header"></header>
+		<div class="position-absolute top-0 left-0">
+			<button type="button" class="btn btn-link  btn-sm "
+				onclick="goBack()">Torna indietro</button>
+
+			<script>
+			function goBack() {
+				window.history.back();
+			}
+		</script>
+		</div>
+
+		<div
+			class=" d-flex  flex-column position-absolute top-50 start-50 translate-middle  ">
+			<table class="table table-bordered table-striped table-dark table-hover fs-4 ">
+				<thead>
+					<tr>
+						<th scope="col">Nome</th>
+						<th scope="col">Posti Totali</th>
+						<th scope="col">
+						<th scope="col">
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="sala : ${sale}">
+						<td th:text="${sala.nome}"></td>
+						<td th:text="${sala.postiTotali}"></td>
+						<td><a th:href="@{'/sale/modifica'+'/'+${sala.id}}">Modifica</a></td>
+						<td th:if="${sala.attiva}"><a
+							th:href="@{'/sale/delete'+'/'+${sala.id}}">Disattiva</a></td>
+						<td th:unless="${sala.attiva}"><a
+							th:href="@{'/sale/delete'+'/'+${sala.id}}">Attiva</a></td>
+
+					</tr>
+
+				</tbody>
+			</table>
 
 
-		<table class="table table-striped table-dark table-hover">
-			<thead>
-				<tr>
-					<th scope="col">Nome</th>
-					<th scope="col">Posti Totali</th>
-					<th scope="col">
-					<th scope="col">
-					
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="sala : ${sale}">
-					<td th:text="${sala.nome}"></td>
-					<td th:text="${sala.postiTotali}"></td>
-					<td><a th:href="@{'/sale/modifica'+'/'+${sala.id}}">Modifica</a></td>
-					<td th:if="${sala.attiva}"><a th:href="@{'/sale/delete'+'/'+${sala.id}}">Disattiva</a></td>
-					<td th:unless="${sala.attiva}"><a th:href="@{'/sale/delete'+'/'+${sala.id}}">Attiva</a></td>
-					
-				</tr>
-
-			</tbody>
-		</table>
-		
-		
-		<!--  MODIFICA SALA  -->
-		<form th:if="${modif}" th:action="@{/admin/modificaSala}" method="POST" th:object="${sala}">
+			<!--  MODIFICA SALA  -->
+			<form th:if="${modif}" th:action="@{/admin/modificaSala}"
+				method="POST" th:object="${sala}">
 				<h1>Modifica sala</h1>
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
@@ -51,38 +64,37 @@
 
 				<h2 class="errore" th:if="${#fields.hasErrors('nome')}"
 					th:errors="*{nome}"></h2>
-					
-				<input type="hidden" th:field="*{id}" th:value="*{id}"/>
-				 <strong>Nome:</strong> <input type="text" th:field="*{nome}" /> <br> 
-				 
-				 <strong>Posti Totali:</strong><input type="text" th:field="*{postiTotali}" /> <br>
-			
+
+				<input type="hidden" th:field="*{id}" th:value="*{id}" /> <strong>Nome:</strong>
+				<input type="text" th:field="*{nome}" /> <br> <strong>Posti
+					Totali:</strong><input type="text" th:field="*{postiTotali}" /> <br>
+
 				<button type="submit">Conferma</button>
 			</form>
-		
-		<!--  AGGIUNGI SALA  -->
-		<form th:unless="${modif}" th:action="@{/admin/addSala}" method="POST" th:object="${sala}">
-				<h1>Aggiungi sala</h1>
+
+			<!--  AGGIUNGI SALA  -->
+			<div class="d-grid gap-4 col-6  ">
+			<form th:unless="${modif}" th:action="@{/admin/addSala}"
+				method="POST" th:object="${sala}">
+				<h2>Aggiungi sala:</h2>
 				<div th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
 
 				<span class="errore" th:if="${#fields.hasErrors('nome')}"
-					th:errors="*{nome}"></span>
-					
-				
-				 <strong>Nome:</strong> <input type="text" th:field="*{nome}" /> <br> 
-				 
-				 <strong>Posti Totali:</strong><input type="text" th:field="*{postiTotali}" /> <br>
-			
-				<button type="submit">Conferma</button>
-			</form>
-			
+					th:errors="*{nome}"></span> <strong>Nome:</strong> <input
+					type="text" th:field="*{nome}" /> <br> <strong>Posti
+					Totali:</strong><input class="my-2"type="text" th:field="*{postiTotali}" /> <br>
 
-			
-			
-		
+				<button class="btn btn-danger " type="submit">Conferma</button>
+			</form>
+			</div>
+
+
+
 		</div>
+	</div>
+
 
 
 

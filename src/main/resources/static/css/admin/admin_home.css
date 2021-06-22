@@ -72,25 +72,9 @@ p{
 
 }
 
-.box .content{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	justify-content: center;
-	padding: 0 20px;
-	height: 100%;
-}
 
-.box .content h1{
-	font-size: 40px;
-}
 
-.box .content p{
-	font-size: 20px;
-	max-width: 700px;
-	margin:20px;
-}
+
 
 .box::before{ 
    content: "";
@@ -106,15 +90,6 @@ p{
     .box *{
     	z-index: 4;
     }
-.box .content h1{
-	color:red;
-	padding:5px;
-	justify-content: space-between;
-	margin:10px;
-	text-decoration: underline;
-	
-	
-}
 
 
-}
+
