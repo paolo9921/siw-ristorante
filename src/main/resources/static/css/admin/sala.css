@@ -86,5 +86,6 @@ p{
     .box *{
     	z-index: 4;
     }
-tbody{color:black;}
+table a{
+	color:black;}
 
