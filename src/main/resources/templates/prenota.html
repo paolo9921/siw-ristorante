@@ -32,7 +32,7 @@
 	<div class="content">
 	<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
 			
-				<div th:if="${#fields.hasGlobalErrors()}">
+				<div class="errore" th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
 				
@@ -40,9 +40,10 @@
 					th:errors="*{nome}"></span> 
 
 				
-				<h2><strong>Prenota il tuo tavolo:</strong></h2>
-				<h3>Data:</h3> <input type="date" th:field="*{data}" />
-				<h3>Orario: </h3><select name="orarioSelezionato">
+				<h2><strong id="titolo">Prenota il tuo tavolo</strong></h2>
+				<h3>Data:</h3> <input type="date" th:field="*{data}" required />
+				
+				<h3>Orario: </h3><select name="orarioSelezionato" required>
 				<option disabled="disabled">--- pranzo ---</option>
 				<option>12:00</option>
 				<option>12:30</option>
@@ -61,7 +62,8 @@
 					
 				<h3>Persone:</h3>
 				<select th:field="*{posti}">
-							<option th:each="i : ${#numbers.sequence(1, 20)}" th:text="|${i} persone|"th:value="${i}">
+							<option th:value=1>1 persona</option>
+							<option th:each="i : ${#numbers.sequence(2, 20)}" th:text="|${i} persone|"th:value="${i}">
 						</select>
 				
 				<h3>Sala: </h3>
@@ -71,10 +73,9 @@
 						
 				
 				<h3>Note per il ristorante: </h3>
-				<textarea th:field="*{nota}"></textarea>
+				<input th:field="*{nota}"></input>
 				
-				<button
-						type="submit">Conferma</button>
+				<button type="submit">Conferma</button>
 
 		
 			

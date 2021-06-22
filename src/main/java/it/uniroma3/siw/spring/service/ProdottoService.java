@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -35,8 +36,28 @@ public class ProdottoService {
 		return prodottoRepository.findAllPizze();
 	}
 	@Transactional
+	public List<Prodotto> tuttiDolci(){
+		return prodottoRepository.findAllDolci();
+	}
+	@Transactional
 	public List<Prodotto> tuttiBevande(){
 		return prodottoRepository.findAllBevande();
+	}
+	@Transactional
+	public void cancellaTutti(){
+		 prodottoRepository.deleteAll();
+	}
+	@Transactional
+	public void cancellaPerId(Long id){
+		prodottoRepository.deleteById(id);
+	}
+	@Transactional
+	public Prodotto prodottoPerId(Long id) {
+		Optional<Prodotto> optional = prodottoRepository.findById(id);
+		if (optional.isPresent())
+			return optional.get();
+		else 
+			return null;
 	}
 
 }

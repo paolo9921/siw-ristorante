@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -109,7 +110,7 @@ public class PrenotazioneController {
 	@RequestMapping(value ="/admin/prenotazioni",method = RequestMethod.GET)
 	public String getPrenotazioni(Model model) {
 		model.addAttribute("salaDataOra", this.salaDataOraService.tutti());
-		model.addAttribute("prenotazioni",this.prenotazioneService.tutti());
+		model.addAttribute("prenotazioni",this.prenotazioneService.tuttiOrdinatiPerData());
 		model.addAttribute("utenti",prenotazioneService.utentiConPrenotazione());
 		model.addAttribute("tavoli",tavoloService.tutti());
 		model.addAttribute("sale",salaService.tutti());
@@ -120,7 +121,7 @@ public class PrenotazioneController {
 	
 	
 	@RequestMapping(value ="/admin/prenotazioniData",method = RequestMethod.GET)
-	public String getPrenotazioniPerData(@RequestParam("dataSelezionata")LocalDate data,Model model) {
+	public String getPrenotazioniPerData(@RequestParam("dataSelezionata")@DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate data,Model model) {
 		logger.debug("******* STO QUA*****");
 		model.addAttribute("salaDataOra", this.salaDataOraService.tutti());
 		model.addAttribute("prenotazioni",this.prenotazioneService.tuttiPerData(data));

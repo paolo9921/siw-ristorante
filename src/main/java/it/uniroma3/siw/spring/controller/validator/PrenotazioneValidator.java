@@ -1,5 +1,7 @@
 package it.uniroma3.siw.spring.controller.validator;
 
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,11 @@ public class PrenotazioneValidator implements Validator{
 
 	
 	public void validate(Prenotazione prenotazione, Sala sala,String orarioSelezionato, Errors errors) {
+		
+		if (prenotazione.getData().isBefore(LocalDate.now()) )
+			errors.reject("prenotazione.data");	
+		
+		
 		String ora;
 		if( ((orarioSelezionato).compareTo("15"))<0 ) {
 			ora = "pranzo";
@@ -44,7 +51,7 @@ public class PrenotazioneValidator implements Validator{
 			if(salaDataOra.getPostiLiberi() < 0) {
 				//rimetto i posti senza questa prenotazione
 				salaDataOra.riduciPostiLiberi(-prenotazione.getPosti());
-				errors.reject("pieno");
+				errors.reject("prenotazione.pieno");
 			}
 		}
 		else{

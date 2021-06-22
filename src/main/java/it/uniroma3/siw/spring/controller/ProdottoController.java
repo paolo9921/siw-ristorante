@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,23 +33,48 @@ public class ProdottoController {
 	
 	
 	
-	@RequestMapping(value="/addProdotto", method = RequestMethod.GET)
+	@RequestMapping(value="/admin/addProdotto", method = RequestMethod.GET)
 	public String addProdotto(Model model) {
 		model.addAttribute("prodotto", new Prodotto());
-		return "prodottoForm.html";
+		model.addAttribute("prodotti",this.prodottoService.tutti());
+		model.addAttribute("modif",false);
+
+		return "admin/prodotti.html";
 	}
 	
-	@RequestMapping(value = "/addProdotto", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/addProdotto", method = RequestMethod.POST)
 	public String newProdotto(@ModelAttribute("prodotto") Prodotto prodotto, Model model,BindingResult bindingResult) {
 		
 		this.prodottoValidator.validate(prodotto,bindingResult);
 		if (!bindingResult.hasErrors()) {
-			
-			
 			this.prodottoService.inserisci(prodotto);
 			
-			return "index.html";
+			model.addAttribute("prodotti",prodottoService.tutti());
+			model.addAttribute("modif",false);
+			return "admin/prodotti.html";
 		}
-		return "prodottoForm.html";
+		return "admin/prodotti.html";
 	}
+	
+	
+   	@RequestMapping(value = "/prodotti/modifica/{id}", method = RequestMethod.GET)
+	public String modificaSala(@PathVariable("id") Long id, Model model) {
+   		model.addAttribute("prodotti", this.prodottoService.tutti());
+		model.addAttribute("prodotto",this.prodottoService.prodottoPerId(id));
+		model.addAttribute("modif",true);
+		
+		return "admin/prodotti.html";
+	}
+	
+	
+	
+	@RequestMapping(value="/prodotti/cancella", method = RequestMethod.GET)
+	public String cancProdotto(@PathVariable("id") Long id, Model model) {
+		prodottoService.cancellaPerId(id);
+		model.addAttribute("prodotti", this.prodottoService.tutti());
+		model.addAttribute("modif",false);
+
+		return "admin/prodotti.html";
+	}
+	
 }

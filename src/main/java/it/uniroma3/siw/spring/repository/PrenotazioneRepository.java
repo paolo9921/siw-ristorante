@@ -23,6 +23,9 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
 	@Query("SELECT p FROM Prenotazione p WHERE data=?1")
 	public List<Prenotazione> findAllByData(LocalDate data);
 	
+	@Query("SELECT p FROM Prenotazione p ORDER BY p.data ASC, p.orario ASC")
+	public List<Prenotazione> findAllByDataOrderByData();
+	
 	public List<Prenotazione> findAllBySala(Sala salaPerId);
 	
 	

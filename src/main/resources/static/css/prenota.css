@@ -81,4 +81,11 @@ div.content{
 	
 	}
 	
-
+#titolo{
+	background-color: lightblue;
+	color: black;
+}
+.errore{
+	color:red;
+	font-weight: bold;
+}

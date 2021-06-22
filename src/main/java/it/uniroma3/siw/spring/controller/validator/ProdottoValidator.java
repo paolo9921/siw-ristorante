@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.controller.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -15,8 +16,8 @@ public class ProdottoValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		// TODO Auto-generated method stub
-		
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"nome", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors,"prezzo", "required");
 	}
 
 }
