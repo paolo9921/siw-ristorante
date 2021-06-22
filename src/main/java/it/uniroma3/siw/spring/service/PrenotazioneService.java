@@ -63,6 +63,10 @@ public class PrenotazioneService {
 		return (List<Prenotazione>) prenotazioneRepository.findAllByData(data);
 	}
 	@Transactional
+	public List<Prenotazione> tuttiPerDataDaOggi() {
+		return (List<Prenotazione>) prenotazioneRepository.findAllByDataFromToday(LocalDate.now());
+	}
+	@Transactional
 	public List<Prenotazione> tuttiOrdinatiPerData() {
 		return (List<Prenotazione>) prenotazioneRepository.findAllByDataOrderByData();
 	}

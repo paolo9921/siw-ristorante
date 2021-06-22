@@ -110,7 +110,7 @@ public class PrenotazioneController {
 	@RequestMapping(value ="/admin/prenotazioni",method = RequestMethod.GET)
 	public String getPrenotazioni(Model model) {
 		model.addAttribute("salaDataOra", this.salaDataOraService.tutti());
-		model.addAttribute("prenotazioni",this.prenotazioneService.tuttiOrdinatiPerData());
+		model.addAttribute("prenotazioni",this.prenotazioneService.tuttiPerDataDaOggi());
 		model.addAttribute("utenti",prenotazioneService.utentiConPrenotazione());
 		model.addAttribute("tavoli",tavoloService.tutti());
 		model.addAttribute("sale",salaService.tutti());
