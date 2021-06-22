@@ -1,0 +1,43 @@
+
+
+#titolo{
+	text-align:center;
+}
+#main{
+	display:flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	margin: 2%;
+}
+
+#form{
+	margin-bottom:10%;
+}
+.box{
+width:45%;
+margin:0 2% 0 2%;
+
+}
+.boxInterno{
+	padding-left:5%;
+	width: 100%;
+	overflow-y: auto; 
+	max-height: 25vh;
+}
+.table table-hover{
+	width:100%;
+}
+
+.colonnaNome{
+width:45%;
+}
+.colonnaPrezzo{
+	width:15%;
+}
+a{
+	color: black;
+	text-decoration:none;
+}
+a:hover{
+	text-decoration: underline;
+}
