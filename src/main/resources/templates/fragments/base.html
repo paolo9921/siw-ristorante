@@ -20,8 +20,8 @@
 					<li><a th:href="@{/menu}">Menu</a></li>
 					<li><a th:href="@{/prenota}">Prenota</a></li>
 					<li><a th:href="@{/contatti}">Contatti</a></li>
-					<li th:if="${#authentication != null}"><a th:href="@{/login}">Login</a></li>
-					<li th:if="${#authentication == null}"><a th:href="@{/logout}">Logout</a></li>
+					<li th:if="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/logout}">Logout</a></li>
+					<li th:unless="${#authorization.expression('isAuthenticated()')}"><a th:href="@{/login}">Login</a></li>					
 				</ul>
 			</nav>
 		</div>
@@ -56,16 +56,16 @@
             Prodotti
           </h6>
           <p>
-            <a th:href="@{/menu}" class="text-reset">Pizza</a>
+            <a th:href="@{/menu}"class="text-reset">Pizza</a>
           </p>
           <p>
-            <a th:href="@{/menu}" class="text-reset">Fritti</a>
+            <a th:href="@{/menu}" data-target="#carouselExampleIndicators" th:data-slide-to="1" class="text-reset">Fritti</a>
           </p>
           <p>
-            <a th:href="@{/menu}" class="text-reset">Dolci</a>
+            <a th:href="@{/menu}" data-target="#carouselExampleIndicators" th:data-slide-to="2" class="text-reset">Dolci</a>
           </p>
           <p>
-            <a th:href="@{/menu}" class="text-reset">Bevande</a>
+            <a th:href="@{/menu}" data-target="#carouselExampleIndicators" th:data-slide-to="3" class="text-reset">Bevande</a>
           </p>
         </div>
         <!-- Grid column -->

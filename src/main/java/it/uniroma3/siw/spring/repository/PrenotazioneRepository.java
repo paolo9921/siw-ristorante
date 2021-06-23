@@ -30,6 +30,9 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
 
 	@Query("SELECT p FROM Prenotazione p WHERE p.data >=?1 ORDER BY p.data ASC, p.orario ASC")
 	public List<Prenotazione> findAllByDataFromToday(LocalDate now);
+
+	@Query("SELECT p FROM Prenotazione p WHERE p.data >=?1 AND p.utente =?2 ORDER BY p.data ASC, p.orario ASC")
+	public List<Prenotazione> findAllByDataFromTodayUtente(LocalDate now,User userCorrente);
 	
 	
 	

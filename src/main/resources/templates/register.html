@@ -106,49 +106,6 @@
 				</div>-->
 
 
-<img class="mb-4" src="/images/roma3.jpg" alt="" width="72"
-						height="57">
-					<h2 class="h3 mb-3 fw-normal">Registrati</h2>
-					
-					<div class="form-floating">
-						<strong>Nome:</strong><br> <input
-							type="text" class="input" name="nome" autofocus="autofocus"
-							placeholder="Nome">
-					</div>
-
-
-					
-						<strong th:text="#{register.surname}">Cognome:</strong><br> <input
-							type="text" class="input" name="cognome" autofocus="autofocus"
-							placeholder="Cognome">
-					
-				
-
-				<div class="riga" th:object="${credentials}">
-					<div class="allinea">
-						<strong>Username:</strong><br> <input
-							th:field="${credentials.username}" type="text" class="input"
-							name="username" autofocus="autofocus" placeholder="Username">
-					</div>
-					<div class="allinea">
-						<strong>Passowrd:</strong><br> <input
-							th:field="${credentials.password}" type="password" class="input"
-							name="password" autofocus="autofocus" placeholder="Password">
-					</div>
-				</div>
-
-				<div class="bottoni">
-					<span><button id="loginButton" type="submit"
-							th:text="#{register.create}">Crea account</button></span>
-				</div>
-			</form>
-			<a th:href="@{/login}"><button th:text="#{form.indietro}">
-					Indietro</button></a>
-
-		</div>
-	</div>
-
-
 
 
 </body>

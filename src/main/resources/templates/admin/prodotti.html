@@ -153,8 +153,19 @@
 			<!-- AGGIUNGI PRODOTTO -->
 			<form th:unless="${modif}" th:action="@{/admin/addProdotto}" method="POST" th:object="${prodotto}" id="form">
 					
+					
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+				</div>
+
+				<span class="errore" th:if="${#fields.hasErrors('nome')}"
+					th:errors="*{nome}"></span> 
+					
+					
+					
+					
 					<strong>Nome:</strong><input required th:field="*{nome}" placeholder="Nome">
-				    <strong>Prezzo:</strong><input type="number" required th:field="*{prezzo}" min="0" value="0" step=".1" placeholder="Prezzo">
+				    <strong>Prezzo:</strong><input type="number" required th:field="*{prezzo}" min="0.1" value="1" step=".1" placeholder="Prezzo">
 	
 					<select th:field="${prodotto.categoria}">
 						<option value="Antipasto">Antipasto</option>
@@ -170,9 +181,19 @@
 			<!-- MODIFICA PRODOTTO -->
 			<form th:if="${modif}" th:action="@{/admin/modificaProdotto}" method="POST" th:object="${prodotto}" id="form">
 					
+					
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasGlobalErrors()}">
+					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+				</div>
+
+				<span class="errore" th:if="${#fields.hasErrors('nome')}"
+					th:errors="*{nome}"></span> 
+					
+					
+					
 					<input type="hidden" th:field="*{id}" th:value="*{id}"/>
 					<strong>Nome:</strong><input required autofocus th:field="*{nome}">
-				    <strong>Prezzo:</strong><input type="number" required th:field="*{prezzo}" min="0" value="0.1" step=".1">
+				    <strong>Prezzo:</strong><input type="number" required th:field="*{prezzo}" min="0.1" value="1" step=".1">
 	
 					<select th:field="${prodotto.categoria}">
 						<option value="Antipasto">Antipasto</option>

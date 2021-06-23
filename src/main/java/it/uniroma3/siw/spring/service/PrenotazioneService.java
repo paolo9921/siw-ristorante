@@ -76,4 +76,8 @@ public class PrenotazioneService {
 		
 		return (List<Prenotazione>) prenotazioneRepository.findAllBySala(salaService.salaPerId(idSala));
 	}
+
+	public List<Prenotazione> tuttiPerDataDaOggiPerUtente(User userCorrente) {
+		return prenotazioneRepository.findAllByDataFromTodayUtente(LocalDate.now(),userCorrente);
+	}
 }

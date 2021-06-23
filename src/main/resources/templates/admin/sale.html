@@ -55,7 +55,7 @@
 
 
 			<!--  MODIFICA SALA  -->
-			<div class="d-grid gap-4 col-6  ">
+			<div class="d-grid gap-4 col-12">
 			<form th:if="${modif}" th:action="@{/admin/modificaSala}"
 				method="POST" th:object="${sala}">
 				<h1>Modifica sala</h1>
@@ -70,13 +70,13 @@
 				<input type="hidden" th:field="*{id}" th:value="*{id}" /> 
 				<strong>Nome:</strong><br>
 				<input required th:field="*{nome}" /> <br> <strong>Posti
-					Totali:</strong><br><input required type="number" min="0" value="0" step=".1" th:field="*{postiTotali}" /> <br><br>
+					Totali:</strong><br><input required type="number" min="0" value="1" step="1" th:field="*{postiTotali}" /> <br><br>
 
 				<button class="btn btn-danger " type="submit">Conferma</button>
 			</form>
 			</div>
 			<!--  AGGIUNGI SALA  -->
-			<div class="d-grid gap-4 col-6  ">
+			<div class="d-grid gap-4 col-12">
 			<form th:unless="${modif}" th:action="@{/admin/addSala}"
 				method="POST" th:object="${sala}">
 				<h2>Aggiungi sala:</h2>
@@ -88,7 +88,7 @@
 					th:errors="*{nome}"></span> 
 					
 				<strong>Nome:</strong> <br><input required type="text" th:field="*{nome}" /> <br> 
-				<strong>Posti Totali:</strong><br><input required class="my-2"type="number" min="0" value="0" step="1" th:field="*{postiTotali}" /> <br>
+				<strong>Posti Totali:</strong><br><input required class="my-2"type="number" min="0" value="1" step="1" th:field="*{postiTotali}" /> <br>
 
 				<button class="btn btn-danger " type="submit">Conferma</button>
 			</form>
