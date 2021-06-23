@@ -12,6 +12,11 @@
 
 #form{
 	margin-bottom:10px;
+	display:flex;
+	flex-flow: row wrap;
+	width:36%;
+	margin-left:32%;
+	justify-content: space-around;
 
 }
 .box{
