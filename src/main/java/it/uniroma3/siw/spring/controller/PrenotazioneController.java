@@ -53,26 +53,28 @@ public class PrenotazioneController {
 	
 	private Sala sala;
 
-	
+	private Prenotazione prenotazioneCorrente = null;
 	
 	@RequestMapping(value="/prenota", method = RequestMethod.GET)
 	public String addPrenotazione(Model model) {
-		
+		logger.debug("******************pren corrente:"+prenotazioneCorrente);
 		model.addAttribute("prenotazione", new Prenotazione());
-		
+		prenotazioneCorrente = null;
 		//model.addAttribute("user",(userService.getUserCorrente()));
 		//logger.debug("**********user: "+userService.getUserCorrente().toString() +"nome: "+userService.getUserCorrente().getNome());
 		model.addAttribute("prenotazioni", this.prenotazioneService.tuttiPerDataDaOggiPerUtente(userService.getUserCorrente()));
 		model.addAttribute("sale", this.salaService.tutti());
+		
 		return "prenota.html";
 	}
 	
 	@RequestMapping(value = "/addPrenotazione", method = RequestMethod.POST)
-	public String newPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,BindingResult bindingResult) {
+	public String newPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione,  Model model,BindingResult bindingResult) {
+		
 		sala = salaService.salaPerId(prenotazione.getSala().getId());
-		//controllare data
+		
 		//i posti liberi nella sala vengono aggiornati nel validate
-		this.prenotazioneValidator.validate(prenotazione,sala,prenotazione.getOrario(),bindingResult);
+		this.prenotazioneValidator.validate(prenotazione,prenotazioneCorrente,bindingResult);
 		
 		if (!bindingResult.hasErrors()) {
 			
@@ -83,6 +85,7 @@ public class PrenotazioneController {
 			
 			this.prenotazioneService.inserisci(prenotazione);
 			model.addAttribute(prenotazione);
+			
 			return "prenotazioneConfermata.html";
 		}
 		model.addAttribute("sale", this.salaService.tutti());
@@ -95,47 +98,27 @@ public class PrenotazioneController {
 	
 	@RequestMapping(value = "/modificaPrenotazione/{id}", method = RequestMethod.GET)
 	public String modificaPrenotazione(@PathVariable("id") Long id, Model model) {
-   		
-		if (prenotazioneService.prenotazionePerId(id).getUtente() != userService.getUserCorrente())
+   		Prenotazione prenotazione = prenotazioneService.prenotazionePerId(id);
+		if (prenotazione.getUtente() != userService.getUserCorrente())
 			return "error.html";
 		
 		model.addAttribute("prenotazione",this.prenotazioneService.prenotazionePerId(id));
 		model.addAttribute("prenotazioni", this.prenotazioneService.tuttiPerDataDaOggiPerUtente(userService.getUserCorrente()));
 		model.addAttribute("sale", this.salaService.tutti());
 
-		return "prenota.html";
-	}
-	
-	
-	@RequestMapping(value = "/modificaPrenotazione", method = RequestMethod.POST)
-	public String modificaPrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione, Model model,BindingResult bindingResult) {
-		//sala = salaService.salaPerId(salaSelezionata);
-		//controllare data
-		//i posti liberi nella sala vengono aggiornati nel validate
-		//this.prenotazioneValidator.validate(prenotazione,sala,orarioSelezionato,bindingResult);
+		prenotazioneCorrente = prenotazione;
 		
-		if (!bindingResult.hasErrors()) {
-			
-			//alla prenotazione assegno un nuovo tavolo con posti= posti della prenotazione e la sala selezionata
-			prenotazione.setTavolo(tavoloService.inserisci(new Tavolo(prenotazione.getPosti(),sala))); 
-			//prenotazione.setSala(sala);
-			prenotazione.setUtente(userService.getUserCorrente());
-			//prenotazione.setOrario(orarioSelezionato);
-			
-			this.prenotazioneService.inserisci(prenotazione);
-			model.addAttribute(prenotazione);
-			return "prenotazioneConfermata.html";
-		}
-		model.addAttribute("sale", this.salaService.tutti());
 		return "prenota.html";
 	}
+	
+
 	
 	@RequestMapping(value ="/eliminaPrenotazione/{id}",method = RequestMethod.GET)
 	public String cancellaPrenotazione(@PathVariable("id") Long id, Model model) {
 		
 		Prenotazione p = prenotazioneService.prenotazionePerId(id);
-		//riduco i posti nella sala
-		//p.getTavolo().getSala().riduciPostiLiberi(-p.getPosti());
+		p.getSalaDataOra().riduciPostiLiberi(-p.getPosti());
+		
 		this.prenotazioneService.cancella(id);
 		
 		model.addAttribute("prenotazione", new Prenotazione());

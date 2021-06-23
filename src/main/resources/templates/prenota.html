@@ -32,7 +32,7 @@
 	<div class="content">
 	
 	<div class="h-75"id="box1">
-		<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
+		<form th:unless="${modif}" th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
 				
 					<div class="alert alert-danger" role="alert" th:if="${#fields.hasGlobalErrors()}">
 						<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
@@ -42,6 +42,7 @@
 						th:errors="*{nome}"></span> 
 					</div>
 					
+					<input th:if="${prenotazione.data}" type="hidden" th:field="${prenotazione.id}" th:value="${prenotazione.id}">
 					<h1><strong class="titoloPrenotazioni" >Prenota il tuo tavolo</strong></h1>
 					
 					<div class="linea">
@@ -80,13 +81,11 @@
 					<h3>Note per il ristorante: </h3>
 					<input th:field="*{nota}"></input>
 					
-					<button type="submit">Conferma</button>
-	
-			
-				
-	
+					
+					<button class="btn btn-outline-dark btn-md border-radius-lg fw-bold" type="submit">Conferma</button>
 	
 				</form>
+		
 			</div>
 			
 		<div id="box2">

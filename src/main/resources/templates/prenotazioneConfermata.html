@@ -33,7 +33,7 @@
 		<span class="fs-2">Prenotazione confermata per <span class="info" th:text="*{posti}"></span> persone;<br>Data:
 		<span class="info" th:text="*{data}"></span> alle ore <span class="info" th:text="*{orario}"></span></span>
 		<h4>Note per il ristorante: </h4>
-		<span class="info" th:text="|&quot;${prenotazione.nota}&quot;|"></span>
+		<span class="info fs-2" th:text="|&quot;${prenotazione.nota}&quot;|"></span>
 
 		<h3>Consulta subito il nostro menù:<br> </h3>
 		<a th:href="@{/menu}" class="btn btn-primary btn-lg border-radius-lg"> Menù</a>

@@ -29,36 +29,39 @@ public class PrenotazioneValidator implements Validator{
 		return false;
 	}
 
-	
-	public void validate(Prenotazione prenotazione, Sala sala,String orarioSelezionato, Errors errors) {
+	public void validate(Prenotazione prenotazione,Prenotazione prenotazioneCorrente, Errors errors) {
+		if(prenotazioneCorrente != null) {
+			logger.debug("+STO NEL VALIDATE pre corrente: "+prenotazioneCorrente.getPosti());
+			prenotazioneCorrente.getSalaDataOra().riduciPostiLiberi(-prenotazioneCorrente.getPosti());
+		}
 		
 		if (prenotazione.getData().isBefore(LocalDate.now()) )
 			errors.reject("prenotazione.data");	
-		
-		
+			
 		String ora;
-		if( ((orarioSelezionato).compareTo("15"))<0 ) {
+		if( ((prenotazione.getOrario()).compareTo("15"))<0 ) {
 			ora = "pranzo";
 		}else ora = "cena";
 		logger.debug("***** ora: "+ora);
-		SalaDataOra salaDataOra = salaDataOraService.alreadyExists(sala, prenotazione.getData(), ora);
-		/*sala.riduciPostiLiberi(prenotazione.getPosti());
-		if(sala.getPostiLiberi() < 0)
-			errors.reject("pieno");*/
+		SalaDataOra salaDataOra = salaDataOraService.alreadyExists(prenotazione.getSala(), prenotazione.getData(), ora);
+		
+		//gia esiste una prenotazione per la stessa sala nella stessa data
 		if (salaDataOra != null) {
+			logger.debug("*******riduco di: "+prenotazione.getPosti());
 			salaDataOra.riduciPostiLiberi(prenotazione.getPosti());
-			logger.debug("******* IF ");
+			
 			if(salaDataOra.getPostiLiberi() < 0) {
-				//rimetto i posti senza questa prenotazione
+				logger.debug("*******posti minori di 0 quindi aumento di: "+prenotazione.getPosti());
 				salaDataOra.riduciPostiLiberi(-prenotazione.getPosti());
-				errors.reject("prenotazione.pieno");
+				salaDataOra.riduciPostiLiberi(-prenotazioneCorrente.getPosti());
+				errors.reject("prenotazione.pieno");				
 			}
 		}
 		else{
 			logger.debug("******* ELSE ");
 
-			salaDataOra = new SalaDataOra(sala, prenotazione.getData(),ora);
-			salaDataOra.setPostiLiberi(sala.getPostiTotali()-prenotazione.getPosti());
+			salaDataOra = new SalaDataOra(prenotazione.getSala(), prenotazione.getData(),ora);
+			salaDataOra.setPostiLiberi(prenotazione.getSala().getPostiTotali()-prenotazione.getPosti());
 			salaDataOraService.inserisci(salaDataOra);
 		}
 		prenotazione.setSalaDataOra(salaDataOra);
