@@ -15,8 +15,10 @@
 
 		<header th:replace="fragments/admin_base :: header"></header>
 		<h1 id="titolo">Gestisci prodotti</h1>
+		
+		
 		<div id="main">
-
+		
 				
 				<div class="box">
 				<h2>Antipasti</h2>
@@ -147,6 +149,7 @@
 				
 	</div><!-- End MAIN -->
 			
+		
 			<!-- AGGIUNGI PRODOTTO -->
 			<form th:unless="${modif}" th:action="@{/admin/addProdotto}" method="POST" th:object="${prodotto}" id="form">
 					
@@ -165,7 +168,7 @@
 				</form>
 				
 			<!-- MODIFICA PRODOTTO -->
-			<form th:if="${modif}" th:action="@{/admin/addProdotto}" method="POST" th:object="${prodotto}" id="form">
+			<form th:if="${modif}" th:action="@{/admin/modificaProdotto}" method="POST" th:object="${prodotto}" id="form">
 					
 					<input type="hidden" th:field="*{id}" th:value="*{id}"/>
 					<strong>Nome:</strong><input required autofocus th:field="*{nome}">
@@ -179,7 +182,7 @@
 					
 					</select>
 	
-					<button type="submit">Aggiungi</button>
+					<button type="submit">Modifica</button>
 				</form>
 	
 	

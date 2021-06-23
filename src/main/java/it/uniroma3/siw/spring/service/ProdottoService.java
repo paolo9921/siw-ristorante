@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.siw.spring.model.Prodotto;
+import it.uniroma3.siw.spring.model.Sala;
 import it.uniroma3.siw.spring.repository.ProdottoRepository;
 
 @Service
@@ -58,6 +59,15 @@ public class ProdottoService {
 			return optional.get();
 		else 
 			return null;
+	}
+	
+	@Transactional
+	public boolean alreadyExists(Prodotto p) {
+		List<Prodotto> prodotti = this.prodottoRepository.findByNome(p.getNome());
+		if (prodotti.size() > 0)
+			return true;
+		else 
+			return false;
 	}
 
 }

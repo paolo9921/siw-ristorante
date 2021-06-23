@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="/css/menu.css">
+<link th:href="@{/css/menu.css}" rel="stylesheet">
+
 <meta charset="utf-8">
 <title>Menù</title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -12,6 +13,9 @@
 	rel="stylesheet"
 	integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
 	crossorigin="anonymous">
+	
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 	
@@ -31,42 +35,151 @@
 	</header>
 
 
+
+
+
+
+<h1>MENU</h1>
+
+
+
+
+<div class="contenitore">
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/images/pizza2.jpeg">
+            <div class="carousel-caption">
+		        <h1>PIZZA</h1>
+					<ul th:each="prodotto : ${prodotti}" th:if="${prodotto.categoria} == 'Pizza'">
+						<li th:text="|${prodotto.nome}     ${prodotto.prezzo} &euro;|">
+					</ul>
+		      </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/images/suppli.jpg" alt="Second slide">
+            <div class="carousel-caption">
+		        <h1>ANTIPASTI</h1>
+					<ul th:each="prodotto : ${prodotti}" th:if="${prodotto.categoria} == 'Antipasto'">
+						<li th:text="|${prodotto.nome}     ${prodotto.prezzo} &euro;|">
+					</ul>
+		      </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/images/tiramisu.jpg" alt="Third slide">
+            <div class="carousel-caption">
+		        <h1>DOLCI</h1>
+					<ul th:each="prodotto : ${prodotti}" th:if="${prodotto.categoria} == 'Dolce'">
+						<li th:text="|${prodotto.nome}     ${prodotto.prezzo} &euro;|">
+					</ul>
+		      </div>
+        </div>
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/images/bevanda.jpg" alt="Fourth slide">
+            <div class="carousel-caption">
+		        <h1>BEVANDE</h1>
+					<ul th:each="prodotto : ${prodotti}" th:if="${prodotto.categoria} == 'Bevanda'">
+						<li th:text="|${prodotto.nome}     ${prodotto.prezzo} &euro;|">
+					</ul>
+		      </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  
+				<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel()">
+		  <div class="carousel-indicators">
+		    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" class="active" aria-current="true" aria-label="Slide 1"></button>
+		    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		  </div>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active" data-bs-interval="10000">
+		      <img src="/images/pizza2.jpeg" class="d-block w-100" alt="...">
+		      <div class="carousel-caption d-none d-md-block">
+		        <h2>PIZZA</h2>
+					<ul th:each="prodotto : ${prodotti}" th:if="${prodotto.categoria} == 'Pizza'">
+						<li th:text="|${prodotto.nome}     ${prodotto.prezzo}|">
+					</ul>
+		      </div>
+		    </div>
+		    <div class="carousel-item" data-bs-interval="2000">
+		      <img src="/images/pizza2.jpeg" class="d-block w-100" alt="...">
+		      <div class="carousel-caption d-none d-md-block">
+		        <h5>Second slide label</h5>
+		        <p>Some representative placeholder content for the second slide.</p>
+		      </div>
+		    </div>
+		    <div class="carousel-item">
+		      <img src="/images/fritti.jpg" class="d-block w-100" alt="...">
+		      <div class="carousel-caption d-none d-md-block">
+		        <h5>Third slide label</h5>
+		        <p>Some representative placeholder content for the third slide.</p>
+		      </div>
+		    </div>
+		  </div>
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Previous</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="visually-hidden">Next</span>
+		  </button>
+		</div>-->
+	</div>
+
+
+<!-- 
+
 	<div class="pizza my-5 ">
 		<img
 			src="/images/pizza2.jpeg">
 
-		<h5>
-			<strong>PIZZA:<br></strong> PIZZA BRESAOLA E RUCOLA pomodoro,
-			mozzarella, bresaola, rucola .................................€ 7,30<br>
-			CALZONE CLASSICO pomodoro, mozzarella, prosciutto e funghi
-			............................................€ 6,70<br> CALZONE
-			LIGHT pomodoro, mozzarella, ricotta fresca, spinaci
-			...............................................€ 6,70<br> PIZZA
-			CAPRICCIOSA pomodoro, mozzarella, prosciutto, funghi, carciofi
-			..............................€ 7,00<br> PIZZA DIAVOLA pomodoro,
-			mozzarella, salamino piccante
-			.......................................................€ 6,70<br>
-			PIZZA 4 FORMAGGI pomodoro, mozzarella, formaggio latteria, emmenthal,
-			gorgonzola .....€ 6,70<br> PIZZA AI FUNGHI pomodoro, mozzarella,
-			funghi freschi
-			...........................................................€ 6,50<br>
-			PIZZA MARGHERITA pomodoro, mozzarella
-			..............................................................................€
-			5,50<br> PIZZA MARINARA pomodoro, origano, aglio
-			...............................................................................€
-			4,00<br> PIZZA AI PORCINI pomodoro, mozzarella, porcini
-			trifolati ........................................................€
-			7,50<br> PIZZA AL PROSCIUTTO pomodoro, mozzarella, prosciutto
-			cotto ..............................................€ 6,80<br>
-			PIZZA ALLA ROMANA pomodoro, mozzarella, acciughe
-			............................................................€ 6,80<br>
-			PIZZA RUCOLA E GRANA pomodoro, mozzarella, rucola, grana a scaglie
-			...............................€ 7,00<br> PIZZA SAN DANIELE
-			pomodoro, mozzarella, prosciutto crudo
-			...................................................€ 7,80<br>
-			PIZZA 4 STAGIONI pomodoro, mozzarella, prosciutto , funghi ,
-			carciofi, salamino ..............€ 7,20<br>
-		</h5>
+		<h3>PIZZA:</h3>
+		<div th:each="prodotto : ${prodotti}" th:if="${prodotto.categoria} == 'Pizza'">
+			
+		
+		
+		</div>
+		
 	</div>
 
 	<div class="fritti my-5">
@@ -106,7 +219,7 @@
 			............................€ 1,50<br>
 		</h5>
 
-	</div>
+	</div>-->
 
 <div th:replace="fragments/base.html :: footer"></div>
 

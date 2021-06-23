@@ -21,6 +21,8 @@ public interface ProdottoRepository extends CrudRepository<Prodotto, Long>{
 	@Query("SELECT p FROM Prodotto p WHERE p.categoria='Bevanda'")
 	public List<Prodotto> findAllBevande();
 
+	public List<Prodotto> findByNome(String nome);
+
 	
 
 }

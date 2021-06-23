@@ -35,6 +35,7 @@
 						<th scope="col">Nome</th>
 						<th scope="col">Posti Totali</th>
 						<th scope="col">
+						<th scope="col">
 					
 					</tr>
 				</thead>
@@ -43,6 +44,8 @@
 						<td th:text="${sala.nome}"></td>
 						<td th:text="${sala.postiTotali}"></td>
 						<td><a th:href="@{'/sale/modifica'+'/'+${sala.id}}">Modifica</a></td>
+						<td th:if="${sala.attiva}"><a th:href="@{'/sale/disattiva'+'/'+${sala.id}}">Disattiva</a></td>
+						<td th:unless="${sala.attiva}"><a th:href="@{'/sale/attiva'+'/'+${sala.id}}">Attiva</a></td>
 						
 
 					</tr>
@@ -52,42 +55,46 @@
 
 
 			<!--  MODIFICA SALA  -->
+			<div class="d-grid gap-4 col-6  ">
 			<form th:if="${modif}" th:action="@{/admin/modificaSala}"
 				method="POST" th:object="${sala}">
 				<h1>Modifica sala</h1>
-				<div th:if="${#fields.hasGlobalErrors()}">
+				<div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
 
 				<h2 class="errore" th:if="${#fields.hasErrors('nome')}"
 					th:errors="*{nome}"></h2>
+				
+				<br>
+				<input type="hidden" th:field="*{id}" th:value="*{id}" /> 
+				<strong>Nome:</strong><br>
+				<input required th:field="*{nome}" /> <br> <strong>Posti
+					Totali:</strong><br><input required type="number" min="0" value="0" step=".1" th:field="*{postiTotali}" /> <br><br>
 
-				<input type="hidden" th:field="*{id}" th:value="*{id}" /> <strong>Nome:</strong>
-				<input type="text" th:field="*{nome}" /> <br> <strong>Posti
-					Totali:</strong><input type="text" th:field="*{postiTotali}" /> <br>
-
-				<button type="submit">Conferma</button>
+				<button class="btn btn-danger " type="submit">Conferma</button>
 			</form>
-
+			</div>
 			<!--  AGGIUNGI SALA  -->
 			<div class="d-grid gap-4 col-6  ">
 			<form th:unless="${modif}" th:action="@{/admin/addSala}"
 				method="POST" th:object="${sala}">
 				<h2>Aggiungi sala:</h2>
-				<div th:if="${#fields.hasGlobalErrors()}">
+				<div class="alert alert-danger" role="alert" th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
 				</div>
 
 				<span class="errore" th:if="${#fields.hasErrors('nome')}"
-					th:errors="*{nome}"></span> <strong>Nome:</strong> <input
-					type="text" th:field="*{nome}" /> <br> <strong>Posti
-					Totali:</strong><input class="my-2"type="text" th:field="*{postiTotali}" /> <br>
+					th:errors="*{nome}"></span> 
+					
+				<strong>Nome:</strong> <br><input required type="text" th:field="*{nome}" /> <br> 
+				<strong>Posti Totali:</strong><br><input required class="my-2"type="number" min="0" value="0" step="1" th:field="*{postiTotali}" /> <br>
 
 				<button class="btn btn-danger " type="submit">Conferma</button>
 			</form>
 			</div>
 
-<a th:href="@{/admin/prenotazioni}"><button class="btn btn-danger my-5">Torna all'elenco completo</button></a>
+<a th:href="@{/admin/sale}"><button class="btn btn-danger my-5">Torna all'elenco completo</button></a>
 		</div>
 	</div>
 

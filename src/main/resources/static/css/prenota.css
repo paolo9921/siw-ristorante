@@ -74,18 +74,23 @@ p{
 
 
 div.content{
-	padding:10px;
+	padding:50px;
 	color: white;
 	font-size: x-large;
 	text-align: center;
-	
+	display:flex;
+	justify-content: space-around;
 	}
 	
 #titolo{
-	background-color: lightblue;
+	background-color: #e2e3e5;
 	color: black;
 }
-.errore{
-	color:red;
-	font-weight: bold;
+.linea{
+	width:100%;
+	color:#41464b;
+	background-color:#e2e3e5;
+	display:flex;
+	margin:5vh;
+	justify-content: space-around;
 }

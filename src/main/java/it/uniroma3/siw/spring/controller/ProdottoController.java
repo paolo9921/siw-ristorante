@@ -53,6 +53,23 @@ public class ProdottoController {
 			model.addAttribute("modif",false);
 			return "admin/prodotti.html";
 		}
+		model.addAttribute("prodotti",prodottoService.tutti());
+		model.addAttribute("modif",false);
+		return "admin/prodotti.html";
+	}
+	@RequestMapping(value = "/admin/modificaProdotto", method = RequestMethod.POST)
+	public String modificaProdotto(@ModelAttribute("prodotto") Prodotto prodotto, Model model,BindingResult bindingResult) {
+		
+		this.prodottoValidator.validateModifica(prodotto,bindingResult);
+		if (!bindingResult.hasErrors()) {
+			this.prodottoService.inserisci(prodotto);
+			
+			model.addAttribute("prodotti",prodottoService.tutti());
+			model.addAttribute("modif",false);
+			return "admin/prodotti.html";
+		}
+		model.addAttribute("prodotti",prodottoService.tutti());
+		model.addAttribute("modif",false);
 		return "admin/prodotti.html";
 	}
 	
@@ -68,10 +85,11 @@ public class ProdottoController {
 	
 	
 	
-	@RequestMapping(value="/prodotti/cancella", method = RequestMethod.GET)
+	@RequestMapping(value="/prodotti/cancella/{id}", method = RequestMethod.GET)
 	public String cancProdotto(@PathVariable("id") Long id, Model model) {
 		prodottoService.cancellaPerId(id);
 		model.addAttribute("prodotti", this.prodottoService.tutti());
+		model.addAttribute("prodotto", new Prodotto());
 		model.addAttribute("modif",false);
 
 		return "admin/prodotti.html";

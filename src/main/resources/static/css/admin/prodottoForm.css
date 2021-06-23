@@ -11,7 +11,8 @@
 }
 
 #form{
-	margin-bottom:10%;
+	margin-bottom:10px;
+
 }
 .box{
 width:45%;
@@ -22,7 +23,8 @@ margin:0 2% 0 2%;
 	padding-left:5%;
 	width: 100%;
 	overflow-y: auto; 
-	max-height: 25vh;
+	min-height: 20vh;
+	max-height: 20vh;
 }
 .table table-hover{
 	width:100%;

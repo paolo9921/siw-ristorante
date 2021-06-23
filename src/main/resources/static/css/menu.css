@@ -112,9 +112,25 @@ div.bevande img{
   height: 50vh;
 }
 
+.contenitore{
+	width:70%;
+	margin-left:15%;
+}
 
-
-
+.carousel-caption {
+	
+	background-color:rgba(255,143,106,0.5);
+    top: 0;
+    bottom: auto;
+}
+.carousel-caption h1{
+    font-size: xxxxx-large;
+    font-weight: bolder;
+}
+img{
+max-height: 75vh;
+border-radius: 30px;
+	}
 
 
 

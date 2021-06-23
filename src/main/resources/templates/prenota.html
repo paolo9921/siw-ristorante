@@ -4,7 +4,7 @@
 <head>
 <link th:href="@{/css/base.css}" rel="stylesheet" />
 <link th:href="@{/css/prenota.css}" rel="stylesheet" />
-<link rel="stylesheet" href="/css/prenota.css">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
 	  integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
@@ -32,45 +32,48 @@
 	<div class="content">
 	<form th:action="@{/addPrenotazione}" method="POST" th:object="${prenotazione}">
 			
-				<div class="errore" th:if="${#fields.hasGlobalErrors()}">
+				<div class="alert alert-danger" role="alert" th:if="${#fields.hasGlobalErrors()}">
 					<p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
-				</div>
+				
 				
 				<span class="errore" th:if="${#fields.hasErrors('nome')}"
 					th:errors="*{nome}"></span> 
-
+				</div>
 				
 				<h2><strong id="titolo">Prenota il tuo tavolo</strong></h2>
-				<h3>Data:</h3> <input type="date" th:field="*{data}" required />
 				
-				<h3>Orario: </h3><select name="orarioSelezionato" required>
-				<option disabled="disabled">--- pranzo ---</option>
-				<option>12:00</option>
-				<option>12:30</option>
-				<option>13:00</option>
-				<option>13:30</option>
-				<option>14:00</option>
-				<option>14:30</option>
-				<option disabled="disabled">--- cena ---</option>
-				<option>19:00</option>
-				<option>19:30</option>
-				<option>20:00</option>
-				<option>20:30</option>
-				<option>21:00</option>
-				<option>21:30</option>
-				</select>
+				<div class="linea">
+					<h3>Data:</h3> <input type="date" th:field="*{data}" required />
 					
-				<h3>Persone:</h3>
-				<select th:field="*{posti}">
-							<option th:value=1>1 persona</option>
-							<option th:each="i : ${#numbers.sequence(2, 20)}" th:text="|${i} persone|"th:value="${i}">
-						</select>
-				
-				<h3>Sala: </h3>
-				<select name="salaSelezionata">
-							<option th:each="sala : ${sale}" th:text="${sala.nome}" th:value="${sala.id}">
-						</select>
-						
+					<h3>Orario: </h3><select name="orarioSelezionato" required>
+					<option disabled="disabled">--- pranzo ---</option>
+					<option>12:00</option>
+					<option>12:30</option>
+					<option>13:00</option>
+					<option>13:30</option>
+					<option>14:00</option>
+					<option>14:30</option>
+					<option disabled="disabled">--- cena ---</option>
+					<option>19:00</option>
+					<option>19:30</option>
+					<option>20:00</option>
+					<option>20:30</option>
+					<option>21:00</option>
+					<option>21:30</option>
+					</select>
+				</div>	
+				<div class="linea">
+					<h3>Persone:</h3>
+					<select th:field="*{posti}">
+								<option th:value=1>1 persona</option>
+								<option th:each="i : ${#numbers.sequence(2, 20)}" th:text="|${i} persone|"th:value="${i}">
+							</select>
+					
+					<h3>Sala: </h3>
+					<select name="salaSelezionata">
+								<option th:each="sala : ${sale}" th:if="${sala.attiva}" th:text="${sala.nome}" th:value="${sala.id}">
+							</select>
+				</div>	
 				
 				<h3>Note per il ristorante: </h3>
 				<input th:field="*{nota}"></input>

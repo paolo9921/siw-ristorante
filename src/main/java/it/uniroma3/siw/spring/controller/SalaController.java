@@ -89,12 +89,22 @@ public class SalaController {
 	
 	
 	
-	@RequestMapping(value = "/sale/delete/{id}", method = RequestMethod.GET)
-	public String deleteSala(@PathVariable("id") Long id, Model model) {
-		
-		//prenotazioneService.cancellaPerSala(salaService.salaPerId(id));
+	@RequestMapping(value = "/sale/disattiva/{id}", method = RequestMethod.GET)
+	public String disattivaSala(@PathVariable("id") Long id, Model model) {
+		logger.debug("*********************************************qua**");
 		this.salaService.salaPerId(id).setAttiva(false);
 		model.addAttribute("sale",this.salaService.tutti());
+		model.addAttribute("sala",new Sala());
+		return "admin/sale.html";
+	}
+	
+	@RequestMapping(value = "/sale/attiva/{id}", method = RequestMethod.GET)
+	public String attivaSala(@PathVariable("id") Long id, Model model) {
+		
+		this.salaService.salaPerId(id).setAttiva(true);
+		model.addAttribute("sale",this.salaService.tutti());
+		model.addAttribute("sala",new Sala());
+
 		return "admin/sale.html";
 	}
 	
