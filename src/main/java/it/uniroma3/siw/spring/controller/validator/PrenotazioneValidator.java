@@ -30,41 +30,64 @@ public class PrenotazioneValidator implements Validator{
 	}
 
 	public void validate(Prenotazione prenotazione,Prenotazione prenotazioneCorrente, Errors errors) {
-		if(prenotazioneCorrente != null) {
-			logger.debug("+STO NEL VALIDATE pre corrente: "+prenotazioneCorrente.getPosti());
-			prenotazioneCorrente.getSalaDataOra().riduciPostiLiberi(-prenotazioneCorrente.getPosti());
-		}
 		
+		// controllo se la data è prima di oggi
 		if (prenotazione.getData().isBefore(LocalDate.now()) )
 			errors.reject("prenotazione.data");	
-			
+		
+		// pranzo o cena
 		String ora;
 		if( ((prenotazione.getOrario()).compareTo("15"))<0 ) {
 			ora = "pranzo";
 		}else ora = "cena";
-		logger.debug("***** ora: "+ora);
+		
 		SalaDataOra salaDataOra = salaDataOraService.alreadyExists(prenotazione.getSala(), prenotazione.getData(), ora);
 		
-		//gia esiste una prenotazione per la stessa sala nella stessa data
-		if (salaDataOra != null) {
-			logger.debug("*******riduco di: "+prenotazione.getPosti());
-			salaDataOra.riduciPostiLiberi(prenotazione.getPosti());
+		if(salaDataOra != null) {
 			
-			if(salaDataOra.getPostiLiberi() < 0) {
-				logger.debug("*******posti minori di 0 quindi aumento di: "+prenotazione.getPosti());
-				salaDataOra.riduciPostiLiberi(-prenotazione.getPosti());
-				salaDataOra.riduciPostiLiberi(-prenotazioneCorrente.getPosti());
-				errors.reject("prenotazione.pieno");				
+			// sto in modifica
+			if (prenotazioneCorrente != null) {
+				
+				prenotazioneCorrente.getSalaDataOra().riduciPostiLiberi(-prenotazioneCorrente.getPosti());
+							
+				if( (salaDataOra.getData().isEqual(prenotazioneCorrente.getData()))&& (salaDataOra.getOra().equals(prenotazioneCorrente.getSalaDataOra().getOra()) ) && (salaDataOra.getSala().getNome().equals(prenotazioneCorrente.getSala().getNome())) ) {
+					salaDataOra.setPostiLiberi(prenotazioneCorrente.getSalaDataOra().getPostiLiberi());
+					logger.debug("STO NELL'IF");
+				}
+				
+				if(salaDataOra.getPostiLiberi() < prenotazione.getPosti()) {
+					prenotazioneCorrente.getSalaDataOra().riduciPostiLiberi(prenotazioneCorrente.getPosti());
+					if( (salaDataOra.getData().isEqual(prenotazioneCorrente.getData()))&& (salaDataOra.getOra().equals(prenotazioneCorrente.getSalaDataOra().getOra()) ) && (salaDataOra.getSala().getNome().equals(prenotazioneCorrente.getSala().getNome())) )
+						salaDataOra.setPostiLiberi(prenotazioneCorrente.getSalaDataOra().getPostiLiberi());
+				}
+			}
+			
+			if(salaDataOra.getPostiLiberi() < prenotazione.getPosti()) 
+				errors.reject("prenotazione.pieno");
+			
+			// ci sono sufficenti posti  (sia in aggiungi che in modifica)
+			else {
+				salaDataOra.riduciPostiLiberi(prenotazione.getPosti());
+				prenotazione.setSalaDataOra(salaDataOra);
 			}
 		}
-		else{
-			logger.debug("******* ELSE ");
-
-			salaDataOra = new SalaDataOra(prenotazione.getSala(), prenotazione.getData(),ora);
-			salaDataOra.setPostiLiberi(prenotazione.getSala().getPostiTotali()-prenotazione.getPosti());
-			salaDataOraService.inserisci(salaDataOra);
+		
+		//nuova salaDataOra
+		else {
+			SalaDataOra nuovaSalaDataOra = new SalaDataOra(prenotazione.getSala(), prenotazione.getData(),ora);
+			if (prenotazione.getSala().getPostiTotali() < prenotazione.getPosti())
+				errors.reject("prenotazione.pieno");
+			
+			else {
+				nuovaSalaDataOra.setPostiLiberi(prenotazione.getSala().getPostiTotali() - prenotazione.getPosti());
+				prenotazione.setSalaDataOra(nuovaSalaDataOra);
+				if (prenotazioneCorrente != null)
+					prenotazioneCorrente.getSalaDataOra().riduciPostiLiberi(-prenotazioneCorrente.getPosti());
+				salaDataOraService.inserisci(nuovaSalaDataOra);
+			}
 		}
-		prenotazione.setSalaDataOra(salaDataOra);
+		
+		
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8" />
@@ -12,6 +13,8 @@
 		
 		
 		<div id="navbar" class="navbar top" th:fragment="navbar">
+		
+			<!-- <span>ciao,</span><span sec:authentication="name"></span>-->
 			<a class="navbar-brand" href="home.HTML"></a>
 			<h1>PIZZERIA ROMA3</h1>
 			<nav>
